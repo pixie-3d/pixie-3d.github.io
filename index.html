@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Pixie – Fast &amp; Generalizable Supervised 3D Physics Learning from Pixels" />
+  <meta name="description" content="Pixie – Fast &amp; 3D Physics from Pixels" />
   <meta name="keywords" content="Pixie, 3D Physics, CLIP, Gaussian Splatting, MPM, Computer Graphics, NeRF" />
   <title>Pixie: 3D Physics from Pixels</title>
 
@@ -156,7 +156,7 @@
         <h1 class="title is-1 publication-title is-size-1-mobile"
           style="font-size:7vw; line-height:1.1; width:100%; max-width:100%;">
           <span class="gradient-text">Pixie</span><br />
-          <span>Fast &amp; Generalizable 3D Physics from Pixels</span>
+          <span>Physics from Pixels</span>
         </h1>
         <!-- mobile quick links -->
         <div class="column has-text-centered is-hidden-tablet">
@@ -179,7 +179,7 @@
     <div class="hero-foot is-hidden-mobile">
       <nav class="tabs is-boxed is-fullwidth is-size-5">
         <ul>
-          <li><a href="#intro">Why?</a></li>
+          <li><a href="#intro">Introduction</a></li>
           <li><a href="#dataset">PixieVerse Dataset</a></li>
           <li><a href="#method">Method</a></li>
           <li><a href="#results">Results</a></li>
@@ -202,6 +202,7 @@
         (material ID, Young's modulus, Poisson's ratio, density) in a single forward pass, enabling real‑time Material
         Point Method simulations.
       </p>
+      <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" />
     </div>
   </section>
 
@@ -244,16 +245,15 @@
   <section id="results" class="section is-medium has-background-light">
     <div class="container is-max-desktop">
       <h2 class="title is-2 has-text-centered">Results</h2>
-      <div class="columns is-centered">
-        <div class="column is-half">
-          <figure class="image is-4by3"><img src="static/images/table_main_results.png" alt="Quantitative results" />
-          </figure>
-        </div>
-        <div class="column is-half">
-          <video style="width:100%;" autoplay muted loop playsinline>
-            <source src="static/videos/qualitative_grid.mp4" type="video/mp4" />
-          </video>
-        </div>
+      <!-- Quantitative results -->
+      <figure class="image is-fullwidth"><img src="static/images/fig_runtime_and_vlm.png" alt="Quantitative results" />
+      </figure>
+
+      <!-- Qualitative results -->
+      <div class="has-text-centered mt-5">
+        <video style="width:100%;" autoplay muted loop playsinline>
+          <source src="static/videos/qualitative_grid.mp4" type="video/mp4" />
+        </video>
       </div>
       <p class="content is-size-5 has-text-justified">
         On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS and NeRF2Physics by 2.2–4.6× in
@@ -328,7 +328,7 @@
       <pre><code>@inproceedings{le2025pixie,
   title={{Pixie}: Fast and Generalizable Supervised 3D Physics Learning from Pixels},
   author={Le, Long and Lucas, Ryan and Wang, Chen and Chen, Chuhao and Jayaraman, Dinesh and Eaton, Eric and Liu, Lingjie},
-  booktitle={Advances in Neural Information Processing Systems},
+  <!-- booktitle={Advances in Neural Information Processing Systems}, -->
   year={2025}
 }</code></pre>
     </div>
