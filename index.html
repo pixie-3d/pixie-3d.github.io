@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
   <link rel="stylesheet" href="./static/css/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css" />
+  <link rel="stylesheet" href="./static/css/real_slider.css" />
 
   <!-- Animated gradient for title -->
   <style>
@@ -82,6 +84,7 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script src="./static/js/real_slider.js"></script>
 </head>
 
 <body>
@@ -265,12 +268,43 @@
   <!-- ──────────  REAL WORLD  ────────── -->
   <section id="real" class="section is-medium">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Zero‑shot Transfer to Real Scenes</h2>
-      <video style="width:100%; border-radius:8px;" autoplay muted loop playsinline>
-        <source src="static/videos/real_generalization.mp4" type="video/mp4" />
-      </video>
-      <p class="content is-size-5 has-text-justified">Without any real‑scene supervision, Pixie predicts plausible
-        material fields for captured NeRFs and produces realistic wind animations aligned with human expectations.</p>
+      <h2 class="title is-2 has-text-centered">Zero-shot Transfer to Real Scenes</h2>
+      <p class="content is-size-5 has-text-justified">Interactively explore Pixie's material predictions on captured
+        NeRF scenes. Drag the slider to compare input RGB with predicted material clusters, switch hierarchy levels, and
+        pick different scenes via thumbnails.</p>
+      <div id="main-results">
+        <div class="switcher" data-switcher-title="Select hierarchy level">
+          <div data-switcher-label="Coarse"></div>
+          <div data-switcher-label="Medium"></div>
+          <div data-switcher-label="Fine"></div>
+        </div>
+        <div id="image-compare-canvas" class="image-compare" data-before-label="RGB" data-after-label="Material Fields">
+          <canvas id="canvas"></canvas>
+        </div>
+        <div class="video-bar base-row">
+          <button id="play-btn" class="video-btn fa fa-lg fa-pause" onclick="play_pause()"
+            style="margin-right:0;"></button>
+          <div style="position:absolute; right:0;">
+            <button class="video-btn fa fa-arrows-alt fa-lg" onclick="fullscreen()"></button>
+          </div>
+        </div>
+        <div>
+          <button class="results-slide-arrow" id="results-slide-arrow-prev"
+            onclick="results_slide_left()">&#8249;</button>
+          <div class="results-slide-row" id="results-objs-scroll">
+            <div data-img-src="static/videos/real_world/renders/keyboard/thumbnail.jpg" data-label="Keyboard"></div>
+            <div data-img-src="static/videos/real_world/renders/succulent/thumbnail.jpg" data-label="Succulent"></div>
+            <div data-img-src="static/videos/real_world/renders/louvre/thumbnail.jpg" data-label="Louvre statue"></div>
+            <div data-img-src="static/videos/real_world/renders/bouquet/thumbnail.jpg" data-label="Bouquet"></div>
+            <div data-img-src="static/videos/real_world/renders/donuts/thumbnail.jpg" data-label="Donuts"></div>
+            <div data-img-src="static/videos/real_world/renders/dozer/thumbnail.jpg" data-label="Dozer"></div>
+            <div data-img-src="static/videos/real_world/renders/table/thumbnail.jpg" data-label="Table"></div>
+            <div data-img-src="static/videos/real_world/renders/nyc_cafe/thumbnail.jpg" data-label="Cafe"></div>
+          </div>
+          <button class="results-slide-arrow" id="results-slide-arrow-next"
+            onclick="results_slide_right()">&#8250;</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -345,7 +379,8 @@
     <div class="container">
       <div class="content has-text-centered">
         <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a>, <a
-            href="https://www.guangzhaohe.com/canor">Canor</a> and <a href="https://nerfies.github.io/">NeRFies</a>.
+            href="https://www.guangzhaohe.com/canor">Canor</a>, <a href="https://www.garfield.studio/">Garfield</a> and
+          <a href="https://nerfies.github.io/">NeRFies</a>.
         </p>
       </div>
     </div>
