@@ -277,13 +277,18 @@
   <!-- ──────────  ABLATION  ────────── -->
   <section id="ablation" class="section is-medium has-background-light">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Ablation Study</h2>
-      <div class="columns is-vcentered">
-        <div class="column is-half"><img src="static/images/feature_ablation.png" alt="Feature ablation" /></div>
-        <div class="column">
-          <p class="content is-size-5">Replacing CLIP with raw RGB or occupancy features severely degrades material
-            accuracy (−20‑40 %) and doubles continuous errors, confirming the importance of semantic priors.</p>
-        </div>
+      <div class="container is-max-desktop">
+        <h2 class="title is-2 has-text-centered">Ablation Study</h2>
+        <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid.png" alt="Method overview" />
+        </figure>
+        <p class="content is-size-5 has-text-justified">
+          <strong> Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
+          transfer. Incorrect predictions such as leave mislaballed as metal or Young's modulus being uniform within an
+          object are marked with question marks.
+          It also severely degrades
+          material accuracy (−20‑40 %) and doubles continuous errors shown Table 1 in our paper, confirming the
+          importance of semantic priors.
+        </p>
       </div>
     </div>
   </section>
@@ -325,6 +330,7 @@
   <section class="section is-small" id="citation">
     <div class="container is-max-desktop">
       <h3 class="title is-4 has-text-centered">Citation</h3>
+      If you find this work useful, please consider citing:
       <pre><code>@inproceedings{le2025pixie,
   title={{Pixie}: Fast and Generalizable Supervised 3D Physics Learning from Pixels},
   author={Le, Long and Lucas, Ryan and Wang, Chen and Chen, Chuhao and Jayaraman, Dinesh and Eaton, Eric and Liu, Lingjie},
@@ -338,8 +344,9 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a> and <a
-            href="https://nerfies.github.io/">NeRFies</a>.</p>
+        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a>, <a
+            href="https://www.guangzhaohe.com/canor">Canor</a> and <a href="https://nerfies.github.io/">NeRFies</a>.
+        </p>
       </div>
     </div>
   </footer>
