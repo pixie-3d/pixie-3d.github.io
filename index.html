@@ -37,43 +37,44 @@
       padding-bottom: 0.1em;
       animation: gradientShift 6s linear infinite;
     }
+  </style>
 
-
-    /* dot scroll nav (cantor style) */
-    /* .scroll-container {
-      overflow-y: scroll;
-      height: 100vh;
-      scroll-snap-type: y mandatory
-    }
-
-    .section {
-      scroll-snap-align: start
-    }
-
+  <!-- Side navigation styles -->
+  <style>
     .section-nav {
       position: fixed;
+      right: 2rem;
       top: 50%;
-      right: 2%;
       transform: translateY(-50%);
-      z-index: 999
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      z-index: 1000;
     }
 
-    .dot {
-      display: block;
-      width: 10px;
-      height: 10px;
-      margin: 8px 0;
+    .section-nav .dot {
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: #bbb;
-      transition: all .3s
+      display: block;
+      transition: background 0.3s, transform 0.3s;
     }
 
-    .dot.active,
-    .dot:hover {
+    .section-nav .dot:hover {
+      transform: scale(1.2);
+    }
+
+    .section-nav .dot.active {
       background: #ff6ec4;
-      width: 12px;
-      height: 12px
-    } */
+    }
+
+    /* Hide on small screens */
+    @media (max-width: 1023px) {
+      .section-nav {
+        display: none;
+      }
+    }
   </style>
 
   <script src="https://kit.fontawesome.com/19914a84eb.js" crossorigin="anonymous"></script>
@@ -81,253 +82,287 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-
-  <script>
-    $(function () { const dots = $(".section-nav .dot"); const secs = $("section.section"); function act() { let idx = secs.toArray().findIndex(s => s.getBoundingClientRect().top >= -window.innerHeight * 0.4); if (idx === -1) idx = secs.length - 1; dots.removeClass("active").eq(idx).addClass("active"); } $(window).on("scroll", act); act(); });
-  </script>
-
 </head>
 
 <body>
-
-  <div class="scroll-container">
-
-    <!-- ──────────  HERO / TEASER  (UMI-on-legs template style)  ────────── -->
-    <section class="section hero is-link is-fullheight video" id="cover" style="overflow:hidden; position:relative;">
-      <!-- desktop video -->
-      <div class="hero-video" style="height:100%; width:177.7778vh; min-width:100%; min-height:56.25vw;">
-        <video playsinline autoplay muted loop>
-          <source src="static/videos/teaser_full_high_quality.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <!-- mobile video -->
-      <div class="hero-video is-hidden-tablet is-inline-block-mobile"
-        style="height:154.2857vw; width:100%; min-width:64.8vh; min-height:100%;">
-        <video playsinline autoplay muted loop>
-          <source src="static/videos/teaser_full_low_quality.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="overlay"></div>
-
-      <!-- NAVBAR (paper | arXiv | code) -->
-      <div class="hero-head is-hidden-mobile">
-        <header class="navbar">
-          <div class="container is-size-5">
-            <div class="navbar-menu">
-              <div class="navbar-end">
-                <a class="navbar-item pl-4 pr-4" href="static/paper.pdf">
-                  <span class="icon" style="margin-right:5px;">
-                    <img src="static/images/pdf.svg" alt="PDF" />
-                  </span>
-                  <span>Paper</span>
-                </a>
-                <a class="navbar-item pl-4 pr-4" href="https://arxiv.org/abs/XXXXX">
-                  <span class="icon" style="margin-right:5px;">
-                    <img src="static/images/arxiv.svg" alt="arXiv" />
-                  </span>
-                  <span>arXiv</span>
-                </a>
-                <span class="navbar-item pl-4 pr-4">
-                  <a class="button is-inverted is-large" href="https://github.com/vlongle/pixie">
-                    <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-        </header>
-      </div>
-
-      <!-- HERO TITLE -->
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title is-1 publication-title is-size-1-mobile"
-            style="font-size:7vw; line-height:1.1; width:100%; max-width:100%;">
-            <span class="gradient-text">Pixie</span><br />
-            <span>Fast &amp; Generalizable 3D Physics from Pixels</span>
-          </h1>
-          <!-- mobile quick links -->
-          <div class="column has-text-centered is-hidden-tablet">
-            <div class="publication-links">
-              <span class="link-block"><a href="static/paper.pdf"
-                  class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
-                      src="static/images/pdf.svg" alt="PDF" /></span><span>Paper</span></a></span>
-              <span class="link-block"><a href="https://arxiv.org/abs/XXXXX"
-                  class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
-                      src="static/images/arxiv.svg" alt="arXiv" /></span><span>arXiv</span></a></span>
-              <span class="link-block"><a href="https://github.com/vlongle/pixie"
-                  class="external-link button is-normal is-rounded is-dark"><span class="icon"><i
-                      class="fab fa-github"></i></span><span>Code</span></a></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- HERO FOOTER TABS -->
-      <div class="hero-foot is-hidden-mobile">
-        <nav class="tabs is-boxed is-fullwidth is-size-5">
-          <ul>
-            <li><a href="#intro">Introduction</a></li>
-            <li><a href="#dataset">PixieVerse Dataset</a></li>
-            <li><a href="#method">Method</a></li>
-            <li><a href="#results">Results</a></li>
-            <li><a href="#real">Real-world</a></li>
-            <li><a href="#ablation">Ablation</a></li>
-            <li><a href="#citation">Citation</a></li>
-          </ul>
-        </nav>
-      </div>
-    </section>
-
-    <!-- ──────────  INTRODUCTION  ────────── -->
-    <section id="intro" class="section is-medium">
-      <div class="container is-max-desktop">
-        <h2 class="title is-2 has-text-centered">Why learn physics fields?</h2>
-        <p class="content is-size-5 has-text-justified">
-          Photorealistic 3D reconstructions (NeRF, Gaussian Splatting) capture geometry &amp; appearance but <em>lack
-            physics</em>. Existing test‑time optimisation methods are slow and scene‑specific. <strong>Pixie</strong>
-          trains a lightweight 3D U‑Net that maps CLIP‑distilled feature grids to <em>dense material fields</em>
-          (material ID, Young’s modulus, Poisson’s ratio, density) in a single forward pass, enabling real‑time Material
-          Point Method simulations.
-        </p>
-      </div>
-    </section>
-
-    <!-- ──────────  DATASET  ────────── -->
-    <section id="dataset" class="section is-medium has-background-light">
-      <div class="container is-max-desktop">
-        <h2 class="title is-2 has-text-centered">PixieVerse Dataset</h2>
-        <div class="columns is-vcentered">
-          <div class="column is-half">
-            <video class="is-rounded" style="width:100%;" autoplay muted loop playsinline>
-              <source src="static/videos/dataset_turntable.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="column">
-            <ul class="content is-size-5">
-              <li><strong>1 624</strong> high‑quality Objaverse assets</li>
-              <li><strong>10</strong> semantic super‑classes</li>
-              <li><strong>6</strong> material constitutive models</li>
-              <li>Per‑voxel annotations of E, ν, ρ &amp; material ID</li>
-              <li>Generated via Gemini‑2.5‑Pro + physics heuristics</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ──────────  METHOD  ────────── -->
-    <section id="method" class="section is-medium">
-      <div class="container is-max-desktop">
-        <h2 class="title is-2 has-text-centered">Method Overview</h2>
-        <figure class="image is-3by2"><img src="static/images/method_overview.png" alt="Method overview" /></figure>
-        <p class="content is-size-5 has-text-justified">
-          Multi‑view RGB images are encoded by a CLIP‑NeRF yielding a 3D feature grid. A compact 3D U‑Net predicts
-          material fields that are transferred onto Gaussian splats and simulated with an MPM solver at real‑time rates.
-        </p>
-      </div>
-    </section>
-
-    <!-- ──────────  RESULTS  ────────── -->
-    <section id="results" class="section is-medium has-background-light">
-      <div class="container is-max-desktop">
-        <h2 class="title is-2 has-text-centered">Results</h2>
-        <div class="columns is-centered">
-          <div class="column is-half">
-            <figure class="image is-4by3"><img src="static/images/table_main_results.png" alt="Quantitative results" />
-            </figure>
-          </div>
-          <div class="column is-half">
-            <video style="width:100%;" autoplay muted loop playsinline>
-              <source src="static/videos/qualitative_grid.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </div>
-        <p class="content is-size-5 has-text-justified">
-          On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS and NeRF2Physics by 2.2–4.6× in
-          Gemini‑Pro realism while running <em>10³×</em> faster.
-        </p>
-      </div>
-    </section>
-
-    <!-- ──────────  REAL WORLD  ────────── -->
-    <section id="real" class="section is-medium">
-      <div class="container is-max-desktop">
-        <h2 class="title is-2 has-text-centered">Zero‑shot Transfer to Real Scenes</h2>
-        <video style="width:100%; border-radius:8px;" autoplay muted loop playsinline>
-          <source src="static/videos/real_generalization.mp4" type="video/mp4" />
-        </video>
-        <p class="content is-size-5 has-text-justified">Without any real‑scene supervision, Pixie predicts plausible
-          material fields for captured NeRFs and produces realistic wind animations aligned with human expectations.</p>
-      </div>
-    </section>
-
-    <!-- ──────────  ABLATION  ────────── -->
-    <section id="ablation" class="section is-medium has-background-light">
-      <div class="container is-max-desktop">
-        <h2 class="title is-2 has-text-centered">Ablation Study</h2>
-        <div class="columns is-vcentered">
-          <div class="column is-half"><img src="static/images/feature_ablation.png" alt="Feature ablation" /></div>
-          <div class="column">
-            <p class="content is-size-5">Replacing CLIP with raw RGB or occupancy features severely degrades material
-              accuracy (−20‑40 %) and doubles continuous errors, confirming the importance of semantic priors.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ──────────  AUTHORS  ────────── -->
-    <section class="section is-small" id="authors">
-      <div class="container is-max-desktop">
-        <h3 class="title is-3 has-text-centered">Authors</h3>
-        <p class="content has-text-centered is-size-5">
-          Long Le<sup>1</sup>, Ryan Lucas<sup>2</sup>, Chen Wang<sup>1</sup>, Chuhao Chen<sup>1</sup>,
-          Dinesh Jayaraman<sup>1</sup>, Eric Eaton<sup>1</sup>, Lingjie Liu<sup>1</sup><br />
-          <sup>1</sup>University of Pennsylvania <sup>2</sup>MIT
-        </p>
-      </div>
-    </section>
-
-    <!-- ──────────  CITATION  ────────── -->
-    <section class="section is-small" id="citation">
-      <div class="container is-max-desktop">
-        <h3 class="title is-4 has-text-centered">Citation</h3>
-        <pre><code>@inproceedings{le2025pixie,
-  title={{Pixie}: Fast and Generalizable Supervised 3D Physics Learning from Pixels},
-  author={Le, Long and Lucas, Ryan and Wang, Chen and Chen, Chuhao and Jayaraman, Dinesh and Eaton, Eric and Liu, Lingjie},
-  booktitle={Advances in Neural Information Processing Systems},
-  year={2025}
-}</code></pre>
-      </div>
-    </section>
-
-    <!-- ──────────  FOOTER  ────────── -->
-    <footer class="footer">
-      <div class="container">
-        <div class="content has-text-centered">
-          <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a> and <a
-              href="https://nerfies.github.io/">NeRFies</a>.</p>
-        </div>
-      </div>
-    </footer>
-
-  </div> <!-- scroll-container end -->
-
-  <!-- Dot scroll nav (cantor style) -->
-  <div class="section-nav is-hidden-mobile">
+  <!-- SIDE NAVIGATION DOTS -->
+  <div class="section-nav">
     <a href="#cover" class="dot active" title="Cover"></a>
     <a href="#intro" class="dot" title="Introduction"></a>
     <a href="#dataset" class="dot" title="Dataset"></a>
     <a href="#method" class="dot" title="Method"></a>
     <a href="#results" class="dot" title="Results"></a>
-    <a href="#real" class="dot" title="Real"></a>
+    <a href="#real" class="dot" title="Real-world"></a>
     <a href="#ablation" class="dot" title="Ablation"></a>
+    <a href="#authors" class="dot" title="Authors"></a>
     <a href="#citation" class="dot" title="Citation"></a>
   </div>
 
+  <!-- ──────────  HERO / TEASER  (UMI-on-legs template style)  ────────── -->
+  <section class="hero is-link is-fullheight video" id="cover" style="overflow:hidden; position:relative;">
+    <!-- desktop video -->
+    <div class="hero-video" style="height:100%; width:177.7778vh; min-width:100%; min-height:56.25vw;">
+      <video playsinline autoplay muted loop>
+        <source src="static/videos/teaser_full_high_quality.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <!-- mobile video -->
+    <div class="hero-video is-hidden-tablet is-inline-block-mobile"
+      style="height:154.2857vw; width:100%; min-width:64.8vh; min-height:100%;">
+      <video playsinline autoplay muted loop>
+        <source src="static/videos/teaser_full_low_quality.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="overlay"></div>
 
+    <!-- NAVBAR (paper | arXiv | code) -->
+    <div class="hero-head is-hidden-mobile">
+      <header class="navbar">
+        <div class="container is-size-5">
+          <div class="navbar-menu">
+            <div class="navbar-end">
+              <a class="navbar-item pl-4 pr-4" href="static/paper.pdf">
+                <span class="icon" style="margin-right:5px;">
+                  <img src="static/images/pdf.svg" alt="PDF" />
+                </span>
+                <span>Paper</span>
+              </a>
+              <a class="navbar-item pl-4 pr-4" href="https://arxiv.org/abs/XXXXX">
+                <span class="icon" style="margin-right:5px;">
+                  <img src="static/images/arxiv.svg" alt="arXiv" />
+                </span>
+                <span>arXiv</span>
+              </a>
+              <a class="navbar-item pl-4 pr-4" href="https://arxiv.org/abs/XXXXX">
+                <span class="icon" style="margin-right:5px;">
+                  <img src="static/images/X_icon.svg" alt="X" />
+                </span>
+                <span>Tweet</span>
+              </a>
+              <span class="navbar-item pl-4 pr-4">
+                <a class="button is-inverted is-large" href="https://github.com/vlongle/pixie">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
 
+    <!-- HERO TITLE -->
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title is-size-1-mobile"
+          style="font-size:7vw; line-height:1.1; width:100%; max-width:100%;">
+          <span class="gradient-text">Pixie</span><br />
+          <span>Fast &amp; Generalizable 3D Physics from Pixels</span>
+        </h1>
+        <!-- mobile quick links -->
+        <div class="column has-text-centered is-hidden-tablet">
+          <div class="publication-links">
+            <span class="link-block"><a href="static/paper.pdf"
+                class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
+                    src="static/images/pdf.svg" alt="PDF" /></span><span>Paper</span></a></span>
+            <span class="link-block"><a href="https://arxiv.org/abs/XXXXX"
+                class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
+                    src="static/images/arxiv.svg" alt="arXiv" /></span><span>arXiv</span></a></span>
+            <span class="link-block"><a href="https://github.com/vlongle/pixie"
+                class="external-link button is-normal is-rounded is-dark"><span class="icon"><i
+                    class="fab fa-github"></i></span><span>Code</span></a></span>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- HERO FOOTER TABS -->
+    <div class="hero-foot is-hidden-mobile">
+      <nav class="tabs is-boxed is-fullwidth is-size-5">
+        <ul>
+          <li><a href="#intro">Why?</a></li>
+          <li><a href="#dataset">PixieVerse Dataset</a></li>
+          <li><a href="#method">Method</a></li>
+          <li><a href="#results">Results</a></li>
+          <!-- <li><a href="#real">Real-world</a></li>
+          <li><a href="#ablation">Ablation</a></li> -->
+          <!-- <li><a href="#citation">Citation</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ──────────  INTRODUCTION  ────────── -->
+  <section id="intro" class="section is-medium">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Why learn physics fields?</h2>
+      <p class="content is-size-5 has-text-justified">
+        Photorealistic 3D reconstructions (NeRF, Gaussian Splatting) capture geometry &amp; appearance but <em>lack
+          physics</em>. Existing test‑time optimisation methods are slow and scene‑specific. <strong>Pixie</strong>
+        trains a lightweight 3D U‑Net that maps CLIP‑distilled feature grids to <em>dense material fields</em>
+        (material ID, Young's modulus, Poisson's ratio, density) in a single forward pass, enabling real‑time Material
+        Point Method simulations.
+      </p>
+    </div>
+  </section>
+
+  <!-- ──────────  DATASET  ────────── -->
+  <section id="dataset" class="section is-medium has-background-light">
+    <div class="container is-fluid">
+      <h2 class="title is-2 has-text-centered">PixieVerse Dataset</h2>
+      <div class="columns is-vcentered">
+        <div class="column is-8-desktop is-12">
+          <video class="is-rounded" style="width:100%;" autoplay muted loop playsinline>
+            <source src="static/videos/cam360.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="column is-4-desktop is-12">
+          <ul class="content is-size-5">
+            <li><strong>1 624</strong> high‑quality Objaverse assets</li>
+            <li><strong>10</strong> semantic super‑classes</li>
+            <li><strong>6</strong> material constitutive models</li>
+            <li>Per‑voxel annotations of E, ν, ρ &amp; material ID</li>
+            <li>Generated via Gemini‑2.5‑Pro + physics heuristics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────  METHOD  ────────── -->
+  <section id="method" class="section is-medium">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Method Overview</h2>
+      <figure class="image is-fullwidth"><img src="static/images/method_overview.png" alt="Method overview" /></figure>
+      <p class="content is-size-5 has-text-justified">
+        Multi‑view RGB images are encoded by a CLIP‑NeRF yielding a 3D feature grid. A compact 3D U‑Net predicts
+        material fields that are transferred onto Gaussian splats and simulated with an MPM solver at real‑time rates.
+      </p>
+    </div>
+  </section>
+
+  <!-- ──────────  RESULTS  ────────── -->
+  <section id="results" class="section is-medium has-background-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Results</h2>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <figure class="image is-4by3"><img src="static/images/table_main_results.png" alt="Quantitative results" />
+          </figure>
+        </div>
+        <div class="column is-half">
+          <video style="width:100%;" autoplay muted loop playsinline>
+            <source src="static/videos/qualitative_grid.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+      <p class="content is-size-5 has-text-justified">
+        On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS and NeRF2Physics by 2.2–4.6× in
+        Gemini‑Pro realism while running <em>10³×</em> faster.
+      </p>
+    </div>
+  </section>
+
+  <!-- ──────────  REAL WORLD  ────────── -->
+  <section id="real" class="section is-medium">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Zero‑shot Transfer to Real Scenes</h2>
+      <video style="width:100%; border-radius:8px;" autoplay muted loop playsinline>
+        <source src="static/videos/real_generalization.mp4" type="video/mp4" />
+      </video>
+      <p class="content is-size-5 has-text-justified">Without any real‑scene supervision, Pixie predicts plausible
+        material fields for captured NeRFs and produces realistic wind animations aligned with human expectations.</p>
+    </div>
+  </section>
+
+  <!-- ──────────  ABLATION  ────────── -->
+  <section id="ablation" class="section is-medium has-background-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Ablation Study</h2>
+      <div class="columns is-vcentered">
+        <div class="column is-half"><img src="static/images/feature_ablation.png" alt="Feature ablation" /></div>
+        <div class="column">
+          <p class="content is-size-5">Replacing CLIP with raw RGB or occupancy features severely degrades material
+            accuracy (−20‑40 %) and doubles continuous errors, confirming the importance of semantic priors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────  AUTHORS  ────────── -->
+  <section class="section is-small" id="authors">
+    <div class="container is-max-desktop">
+      <h3 class="title is-3 has-text-centered">Authors</h3>
+      <div class="is-size-5 publication-authors has-text-centered">
+        <span class="author-block">
+          <a target="_blank" rel="noopener noreferrer" href="https://vlongle.github.io">Long Le</a><sup>1</sup>
+        </span>,
+        <span class="author-block">
+          <a target="_blank" rel="noopener noreferrer" href="https://ryanlucas3.github.io/">Ryan Lucas</a><sup>2</sup>
+        </span>,
+        <span class="author-block">
+          <a target="_blank" rel="noopener noreferrer" href="https://cwchenwang.github.io/">Chen Wang</a><sup>1</sup>
+        </span>,
+        <span class="author-block">
+          <a target="_blank" rel="noopener noreferrer" href="https://czzzzh.github.io/">Chuhao Chen</a><sup>1</sup>
+        </span>,
+        <span class="author-block">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.seas.upenn.edu/~dineshj/">Dinesh
+            Jayaraman</a><sup>1</sup>
+        </span>,
+        <span class="author-block">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.seas.upenn.edu/~eeaton/">Eric
+            Eaton</a><sup>1</sup>
+        </span>,
+        <span class="author-block">
+          <a target="_blank" rel="noopener noreferrer" href="https://lingjie0206.github.io/">Lingjie Liu</a><sup>1</sup>
+        </span><br />
+        <sup>1</sup>University of Pennsylvania <sup>2</sup>MIT
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────  CITATION  ────────── -->
+  <section class="section is-small" id="citation">
+    <div class="container is-max-desktop">
+      <h3 class="title is-4 has-text-centered">Citation</h3>
+      <pre><code>@inproceedings{le2025pixie,
+  title={{Pixie}: Fast and Generalizable Supervised 3D Physics Learning from Pixels},
+  author={Le, Long and Lucas, Ryan and Wang, Chen and Chen, Chuhao and Jayaraman, Dinesh and Eaton, Eric and Liu, Lingjie},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ──────────  FOOTER  ────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a> and <a
+            href="https://nerfies.github.io/">NeRFies</a>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Side navigation script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.section-nav a');
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const active = document.querySelector(`.section-nav a[href="#${entry.target.id}"]`);
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { threshold: 0.35 });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
 </body>
 
 </html>
