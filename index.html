@@ -10,7 +10,7 @@
   <title>
     Pixie: Supervised 3D Physics Learning from Pixels
   </title>
-
+  <!-- 
   <link rel="apple-touch-icon" sizes="57x57"
     href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-57x57.png" />
   <link rel="apple-touch-icon" sizes="60x60"
@@ -45,7 +45,7 @@
   <meta name="msapplication-TileImage" content="//www-media.stanford.edu/assets/favicon/mstile-144x144.png" />
   <meta name="msapplication-square70x70logo" content="//www-media.stanford.edu/assets/favicon/mstile-70x70.png" />
   <meta name="msapplication-square150x150logo" content="//www-media.stanford.edu/assets/favicon/mstile-150x150.png" />
-  <meta name="msapplication-square310x310logo" content="//www-media.stanford.edu/assets/favicon/mstile-310x310.png" />
+  <meta name="msapplication-square310x310logo" content="//www-media.stanford.edu/assets/favicon/mstile-310x310.png" /> -->
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ38WT2YPD"></script>
@@ -97,13 +97,14 @@
 <section class="hero is-link is-fullheight video" style="overflow: hidden; position:relative;">
   <div class="hero-video" style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
     <video playsinline autoplay muted loop>
-      <source src="./static/videos/teaser_full.mp4" type="video/mp4">
+      <source src="./static/videos/teaser_full_high_quality.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-video is-hidden-tablet is-inline-block-mobile"
     style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
     <video playsinline autoplay muted loop>
-      <source src=" ./static/videos/teaser-mobile-small.mp4" type="video/mp4">
+      <!-- <source src=" ./static/videos/teaser-mobile-small.mp4" type="video/mp4"> -->
+      <source src=" ./static/videos/teaser_full_low_quality.mp4" type="video/mp4">
     </video>
   </div>
   <div class="overlay"></div>
@@ -124,11 +125,17 @@
                 <img src="./static/images/arxiv.svg" alt="ArXiv" />
               </span>
               <span>arXiv</span> </a>
-            <a href="https://youtu.be/4Bp0q3xHTxE" class="navbar-item  pl-4 pr-4">
+            <!-- <a href="https://youtu.be/4Bp0q3xHTxE" class="navbar-item  pl-4 pr-4">
               <span class="icon" style="margin-right:5px;">
                 <img src="./static/images/youtube.svg" alt="Youtube" />
               </span>
-              <span>Video</span> </a>
+              <span>Video</span> </a> -->
+            <a class="navbar-item  pl-4 pr-4" href="https://arxiv.org/abs/2407.10353">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/X_icon.svg" alt="ArXiv" />
+              </span>
+              <span>Tweet</span> </a>
+            </span>
             <span class="navbar-item  pl-4 pr-4">
               <a href="https://github.com/real-stanford/umi-on-legs" class="button is-inverted is-large">
                 <span class="icon">
@@ -171,12 +178,20 @@
             </a>
           </span>
           <!-- Video Link. -->
-          <span class="link-block">
+          <!-- <span class="link-block">
             <a href="https://youtu.be/4Bp0q3xHTxE" class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
                 <img src="./static/images/youtube.svg" alt="Youtube" />
               </span>
               <span>Video</span>
+            </a>
+          </span> -->
+          <span class="link-block">
+            <a href="https://youtu.be/4Bp0q3xHTxE" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/X_icon.svg" alt="Youtube" />
+              </span>
+              <span>Tweet</span>
             </a>
           </span>
           <!-- Code Link. -->
