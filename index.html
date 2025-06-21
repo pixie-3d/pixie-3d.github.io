@@ -95,9 +95,9 @@
     <a href="#dataset" class="dot" title="Dataset"></a>
     <a href="#method" class="dot" title="Method"></a>
     <a href="#results" class="dot" title="Results"></a>
-    <a href="#real" class="dot" title="Real-world"></a>
+    <!-- <a href="#real" class="dot" title="Real-world"></a>
     <a href="#ablation" class="dot" title="Ablation"></a>
-    <a href="#authors" class="dot" title="Authors"></a>
+    <a href="#authors" class="dot" title="Authors"></a> -->
     <a href="#citation" class="dot" title="Citation"></a>
   </div>
 
@@ -250,7 +250,22 @@
       <h2 class="title is-2 has-text-centered">Results</h2>
       <!-- Quantitative results -->
       <figure class="image is-fullwidth"><img src="static/images/fig_runtime_and_vlm.png" alt="Quantitative results" />
+        <p class="content is-size-5 has-text-justified">
+          <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS
+          and NeRF2Physics by 2.2–4.6× in
+          Gemini‑Pro realism while running <em>10³×</em> faster.
+        </p>
       </figure>
+      <br /> <br />
+      <!-- Quantitative results -->
+      <figure class="image is-fullwidth"><img src="static/images/table_main_results.png" alt="Quantitative results" />
+        <p class="content is-size-5 has-text-justified">
+          <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS
+          and NeRF2Physics by 2.2–4.6× in
+          Gemini‑Pro realism while running <em>10³×</em> faster.
+        </p>
+      </figure>
+
 
       <!-- Qualitative results -->
       <div class="has-text-centered mt-5">
@@ -258,10 +273,6 @@
           <source src="static/videos/qualitative_grid.mp4" type="video/mp4" />
         </video>
       </div>
-      <p class="content is-size-5 has-text-justified">
-        On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS and NeRF2Physics by 2.2–4.6× in
-        Gemini‑Pro realism while running <em>10³×</em> faster.
-      </p>
     </div>
   </section>
 
@@ -316,13 +327,22 @@
         <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid.png" alt="Method overview" />
         </figure>
         <p class="content is-size-5 has-text-justified">
-          <strong> Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
+          <strong>Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
           transfer. Incorrect predictions such as leave mislaballed as metal or Young's modulus being uniform within an
           object are marked with question marks.
+
+        </p>
+
+
+        <figure class="image is-fullwidth"><img src="static/images/seg_acc_heatmap.png" alt="Method overview" />
+        </figure>
+        <p class="content is-size-5 has-text-justified">
+          <strong>Ablation Figure:</strong>
           It also severely degrades
-          material accuracy (−20‑40 %) and doubles continuous errors shown Table 1 in our paper, confirming the
+          material accuracy (−20‑40 %) and doubles continuous errors shown Table 1, confirming the
           importance of semantic priors.
         </p>
+
       </div>
     </div>
   </section>
