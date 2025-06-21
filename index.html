@@ -281,13 +281,14 @@
     <div class="container is-max-desktop">
       <h2 class="title is-2 has-text-centered">Zero-shot Transfer to Real Scenes</h2>
       <p class="content is-size-5 has-text-justified">Interactively explore Pixie's material predictions on captured
-        NeRF scenes. Drag the slider to compare input RGB with predicted material clusters, switch hierarchy levels, and
+        NeRF scenes. Drag the slider to compare input RGB with predicted physics fields, switch feature views, and
         pick different scenes via thumbnails.</p>
       <div id="main-results">
-        <div class="switcher" data-switcher-title="Select hierarchy level">
-          <div data-switcher-label="Coarse"></div>
-          <div data-switcher-label="Medium"></div>
-          <div data-switcher-label="Fine"></div>
+        <div class="switcher" data-switcher-title="Feature view">
+          <div data-switcher-label="Material"></div>
+          <div data-switcher-label="Young&#39;s&nbsp;E"></div>
+          <div data-switcher-label="Density"></div>
+          <div data-switcher-label="Poisson&nbsp;ν"></div>
         </div>
         <div id="image-compare-canvas" class="image-compare" data-before-label="RGB" data-after-label="Material Fields">
           <canvas id="canvas"></canvas>
@@ -303,14 +304,10 @@
           <button class="results-slide-arrow" id="results-slide-arrow-prev"
             onclick="results_slide_left()">&#8249;</button>
           <div class="results-slide-row" id="results-objs-scroll">
-            <div data-img-src="static/videos/real_world/renders/keyboard/thumbnail.jpg" data-label="Keyboard"></div>
-            <div data-img-src="static/videos/real_world/renders/succulent/thumbnail.jpg" data-label="Succulent"></div>
-            <div data-img-src="static/videos/real_world/renders/louvre/thumbnail.jpg" data-label="Louvre statue"></div>
-            <div data-img-src="static/videos/real_world/renders/bouquet/thumbnail.jpg" data-label="Bouquet"></div>
-            <div data-img-src="static/videos/real_world/renders/donuts/thumbnail.jpg" data-label="Donuts"></div>
-            <div data-img-src="static/videos/real_world/renders/dozer/thumbnail.jpg" data-label="Dozer"></div>
-            <div data-img-src="static/videos/real_world/renders/table/thumbnail.jpg" data-label="Table"></div>
-            <div data-img-src="static/videos/real_world/renders/nyc_cafe/thumbnail.jpg" data-label="Cafe"></div>
+            <div data-img-src="static/videos/ours_real_world/renders/vasedeck/thumbnail.jpg" data-label="Vasedeck">
+            </div>
+            <div data-img-src="static/videos/ours_real_world/renders/bonsai/thumbnail.jpg" data-label="Bonsai"></div>
+            <div data-img-src="static/videos/ours_real_world/renders/bouquet/thumbnail.jpg" data-label="Bouquet"></div>
           </div>
           <button class="results-slide-arrow" id="results-slide-arrow-next"
             onclick="results_slide_right()">&#8250;</button>
@@ -398,7 +395,7 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a>, <a
+        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a>, <a
             href="https://www.guangzhaohe.com/canor">Canor</a>, <a href="https://www.garfield.studio/">Garfield</a> and
           <a href="https://nerfies.github.io/">NeRFies</a>.
         </p>

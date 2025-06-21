@@ -1,32 +1,26 @@
 /* Real-world interactive slider – adapted from GARField project page */
 
 const VIDEO_ASPECT_RATIO = 16.0 / 9.0;
+
+/* Scenes available for real-world demo */
 const videoNames = [
-    "keyboard",
-    "succulent",
-    "louvre",
-    "bouquet",
-    "donuts",
-    "dozer",
-    "table",
-    "cafe"
+    "vasedeck",
+    "bonsai",
+    "bouquet"
 ];
 
+/* Map from scene → video path (concatenated RGB|material|E|density|nu) */
 const videoPathMap = {
-    keyboard: "static/videos/real_world/renders/keyboard/concat.mp4",
-    succulent: "static/videos/real_world/renders/succulent/concat.mp4",
-    louvre: "static/videos/real_world/renders/louvre/concat.mp4",
-    bouquet: "static/videos/real_world/renders/bouquet/concat.mp4",
-    donuts: "static/videos/real_world/renders/donuts/concat.mp4",
-    dozer: "static/videos/real_world/renders/dozer/concat.mp4",
-    table: "static/videos/real_world/renders/table/concat.mp4",
-    cafe: "static/videos/real_world/renders/nyc_cafe/concat.mp4"
+    vasedeck: "static/videos/ours_real_world/renders/vasedeck/concat.mp4",
+    bonsai: "static/videos/ours_real_world/renders/bonsai/concat.mp4",
+    bouquet: "static/videos/ours_real_world/renders/bouquet/concat.mp4"
 };
 
 let videos = [];
 let currentVideoIdx = 0;
 let videoWidth = 960;
-let displayLevel = 2; // 0-coarse,1-medium,2-fine
+// Which feature to show on the right pane: 0-material, 1-E, 2-density, 3-nu
+let displayLevel = 0;
 
 function buildHiddenVideos() {
     const realSection = document.getElementById("real");
@@ -185,7 +179,7 @@ $(function () {
                 type: "radio",
                 name: `switcher-${switcherIdx}`,
                 id,
-                checked: childIdx === 2
+                checked: childIdx === 0
             }).on("click", () => {
                 $current.addClass("switcher-hidden");
                 displayLevel = childIdx;
@@ -194,7 +188,7 @@ $(function () {
             });
             const $label = $("<label>", { text: $child.data("switcher-label"), for: id });
             $container.append($("<div>").append($input, $label));
-            if (childIdx !== 2) {
+            if (childIdx !== 0) {
                 $child.addClass("switcher-hidden");
                 $input.addClass("switcher-hidden");
                 $label.addClass("switcher-hidden");
