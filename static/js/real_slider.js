@@ -1,12 +1,19 @@
 /* Real-world interactive slider – adapted from GARField project page */
 
-const VIDEO_ASPECT_RATIO = 16.0 / 9.0;
+/* ---- CONSTANTS YOU CARE ABOUT ---- */
+const SEGMENT_COUNT = 5;
+const PANE_WIDTH = 960;          // must match Python
+const PANE_HEIGHT = 540;
+const VIDEO_ASPECT_RATIO =          // width ÷ height of the *whole* concat video
+    PANE_WIDTH / PANE_HEIGHT;   // 3200 / 360 ≈ 8.888
+
+
 
 /* Scenes available for real-world demo */
 const videoNames = [
-    "vasedeck",
+    "bouquet",
     "bonsai",
-    "bouquet"
+    "vasedeck",
 ];
 
 /* Map from scene → video path (concatenated RGB|material|E|density|nu) */
@@ -18,7 +25,7 @@ const videoPathMap = {
 
 let videos = [];
 let currentVideoIdx = 0;
-let videoWidth = 960;
+// Width of the displayed canvas (updated on resize)
 // Which feature to show on the right pane: 0-material, 1-E, 2-density, 3-nu
 let displayLevel = 0;
 
@@ -126,16 +133,36 @@ $(function () {
 
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
-        const scaledLeft = (newLeft * 960) / videoWidth;
         const video = videos[currentVideoIdx];
         if (!video) return;
-        ctx.drawImage(video, 0, 0, scaledLeft, 520, 0, 0, newLeft, videoWidth / VIDEO_ASPECT_RATIO);
+
+        /* Calculate per-segment dimensions based on the actual video resolution. */
+        const segmentWidth = (video.videoWidth || 960) / SEGMENT_COUNT;
+        const segmentHeight = video.videoHeight || 520;
+
+        /* Map handle position (newLeft) from canvas space → video segment space. */
+        const scaledLeft = (newLeft * segmentWidth) / videoWidth;
+
+        /* Draw RGB (left pane) */
         ctx.drawImage(
             video,
-            960 * (displayLevel + 1) + scaledLeft,
             0,
-            960 - scaledLeft,
-            520,
+            0,
+            scaledLeft,
+            segmentHeight,
+            0,
+            0,
+            newLeft,
+            videoWidth / VIDEO_ASPECT_RATIO
+        );
+
+        /* Draw selected feature (right pane) */
+        ctx.drawImage(
+            video,
+            segmentWidth * (displayLevel + 1) + scaledLeft,
+            0,
+            segmentWidth - scaledLeft,
+            segmentHeight,
             newLeft,
             0,
             videoWidth - newLeft,
