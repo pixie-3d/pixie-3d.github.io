@@ -64,6 +64,7 @@
       background: #bbb;
       display: block;
       transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
     }
 
     .section-nav .dot:hover {
@@ -79,6 +80,158 @@
       .section-nav {
         display: none;
       }
+    }
+  </style>
+
+  <!-- Tip banner styles -->
+  <style>
+    .tip-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(90deg, #fff3cd, #ffe8a1);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .tip-banner .icon i {
+      animation: tipPulse 2s infinite;
+      color: #ffb300;
+    }
+
+    @keyframes tipPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+    }
+
+    /* ─── Added banner & score styles ─── */
+    .info-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(90deg, #d0e8ff, #b5d0ff);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-banner .icon i {
+      animation: infoPulse 2s infinite;
+      color: #3d8bfd;
+    }
+
+    @keyframes infoPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+    }
+
+    .good-score {
+      color: #27ae60;
+      font-weight: 600;
+    }
+
+    .bad-score {
+      color: #c0392b;
+      font-weight: 600;
+    }
+
+    /* Success & warning banners for variation */
+    .success-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(90deg, #d4edda, #bff7d8);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .success-banner .icon i {
+      animation: infoPulse 2s infinite;
+      color: #28a745;
+    }
+
+    .warning-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(90deg, #fff3cd, #ffe8a1);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .warning-banner .icon i {
+      animation: infoPulse 2s infinite;
+      color: #ffb300;
+    }
+
+    /* Gradient keyword effect */
+    .glow-keyword {
+      background: linear-gradient(90deg, #16de91, #3d91ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Lead emoji alignment helper */
+    .lead-emoji {
+      font-size: 1.15em;
+      margin-right: 0.25em;
+    }
+
+    /* Dark-mode variables */
+    html.dark {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    /* Scroll progress bar */
+    #scrollbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6ec4, #7873f5);
+      z-index: 9999;
+    }
+  </style>
+
+  <style>
+    .author-block figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* ensure fill and crop */
+      object-position: center;
+      /* keep face centred */
     }
   </style>
 
@@ -160,6 +313,8 @@
       <div class="container has-text-centered">
         <h1 class="title is-1 publication-title is-size-1-mobile"
           style="font-size:7vw; line-height:1.1; width:100%; max-width:100%;">
+          <i id="changing-icon" class="ti ti-leaf"
+            style="font-size:1em; vertical-align:middle; margin-right:0.15em;"></i>
           <span class="gradient-text">Pixie</span><br />
           <span>Physics from Pixels</span>
         </h1>
@@ -202,37 +357,76 @@
       <h2 class="title is-2 has-text-centered">Why learn physics fields?</h2>
       <p class="content is-size-5 has-text-justified">
         Photorealistic 3D reconstructions (NeRF, Gaussian Splatting) capture geometry &amp; appearance but <em>lack
-          physics</em>. Existing test‑time optimisation methods are slow and scene‑specific. <strong>Pixie</strong>
-        trains a lightweight 3D U‑Net that maps CLIP‑distilled feature grids to <em>dense material fields</em>
-        (material ID, Young's modulus, Poisson's ratio, density) in a single forward pass, enabling real‑time Material
-        Point Method simulations.
+          physics</em>. This limits 3D reconstruction to static scenes. Recently, there has been a surge of
+        interest in integrating physics into
+        3D modeling. But existing test‑time optimisation methods are slow and scene‑specific.
+        <strong>Pixie</strong>
+        trains a neural network thatmaps pretrained visual features (i.e., CLIP) to <em>dense material
+          fields</em> of physical properties in a single forward pass, enabling real‑time
+        physics simulations.
       </p>
       <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" />
     </div>
   </section>
 
+
   <!-- ──────────  DATASET  ────────── -->
   <section id="dataset" class="section is-medium has-background-light">
     <div class="container is-fluid">
-      <h2 class="title is-2 has-text-centered">PixieVerse Dataset</h2>
-      <div class="columns is-vcentered">
-        <div class="column is-8-desktop is-12">
-          <video class="is-rounded" style="width:100%;" autoplay muted loop playsinline>
-            <source src="static/videos/cam360.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="column is-4-desktop is-12">
-          <ul class="content is-size-5">
-            <li><strong>1 624</strong> high‑quality Objaverse assets</li>
-            <li><strong>10</strong> semantic super‑classes</li>
-            <li><strong>6</strong> material constitutive models</li>
-            <li>Per‑voxel annotations of E, ν, ρ &amp; material ID</li>
-            <li>Generated via Gemini‑2.5‑Pro + physics heuristics</li>
-          </ul>
+      <div class="columns has-text-centered">
+        <div class="column is-12">
+          <h2 class="title is-2">PixieVerse Dataset</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              PixieVerse is a large-scale synthetic benchmark for visual-physics learning. It features thousands of
+              high-quality assets that span diverse semantic classes and material behaviours, each annotated with dense
+              physical properties. The dataset is labeled automatically via a VLM pipeline we developed.
+            </p>
+          </div>
+
+          <div class="tip-banner">
+            <span class="icon"><i class="fas fa-lightbulb"></i></span>
+            <span><strong>Tip:</strong>&nbsp; See our paper for plots of the data
+              distributions.</span>
+          </div>
+
+          <div class="columns is-vcentered is-multiline" style="margin-top:1.5rem;">
+            <div class="column is-9-desktop is-12">
+              <video class="is-rounded" style="width:100%;" autoplay muted loop playsinline>
+                <source src="static/videos/cam360.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="column is-3-desktop is-12">
+              <div class="columns is-mobile is-multiline is-variable is-2" style="margin-bottom:1rem;">
+                <div class="column is-half has-text-centered">
+                  <p class="heading">Assets</p>
+                  <p class="title"><span class="count-up" data-target="1624">0</span></p>
+                </div>
+                <div class="column is-half has-text-centered">
+                  <p class="heading">Super-classes</p>
+                  <p class="title"><span class="count-up" data-target="10">0</span></p>
+                </div>
+                <div class="column is-half has-text-centered">
+                  <p class="heading">Material Models</p>
+                  <p class="title"><span class="count-up" data-target="6">0</span></p>
+                </div>
+                <div class="column is-half has-text-centered">
+                  <p class="heading">Annotations</p>
+                  <p class="title glow-keyword">E, ν, ρ, ID</p>
+                </div>
+              </div>
+              <!-- <ul class="content is-size-6" style="margin-top:0;">
+                <li>Per-voxel annotations of <span class="glow-keyword">E, ν, ρ</span> & material ID</li>
+                <li>Generated via Gemini-2.5-Pro + physics heuristics</li>
+              </ul> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- ──────────  METHOD  ────────── -->
   <section id="method" class="section is-medium">
@@ -240,32 +434,46 @@
       <h2 class="title is-2 has-text-centered">Method Overview</h2>
       <figure class="image is-fullwidth"><img src="static/images/method_overview.png" alt="Method overview" /></figure>
       <p class="content is-size-5 has-text-justified">
-        Multi‑view RGB images are encoded by a CLIP‑NeRF yielding a 3D feature grid. A compact 3D U‑Net predicts
-        material fields that are transferred onto Gaussian splats and simulated with an MPM solver at real‑time rates.
+        Multi‑view posed RGB images are encoded by a NeRF with distilled CLIP features yielding a 3D feature grid. A
+        3D U‑Net predicts material fields that are transferred onto Gaussian splats and simulated with an Material Point
+        Method (MPM) Physics solver to produce 3D physics simulations.
       </p>
     </div>
   </section>
 
   <!-- ──────────  RESULTS  ────────── -->
   <section id="results" class="section is-medium has-background-light">
+
+    <!-- Added: insight banner highlighting key takeaway -->
+    <div class="info-banner">
+      <span class="icon"><i class="fas fa-chart-line"></i></span>
+      <span><strong>Insight:</strong>&nbsp;Pixie achieves <span class="good-score">state-of-the-art</span> realism
+        while running <span style="color:#ff6ec4; font-weight:600;">10³× faster</span> than existing approaches!
+        ⚡️</span>
+    </div>
+    </div>
     <div class="container is-max-desktop">
       <h2 class="title is-2 has-text-centered">Results</h2>
+      We render a video of each 3D physic animation predicted by our model and other competitors. A state-of-the-art VLM
+      <a href="https://gemini.google.com/app">Gemini-Pro-2.5</a> is used to evaluate the realism and score the
+      candidates.
       <!-- Quantitative results -->
       <figure class="image is-fullwidth"><img src="static/images/fig_runtime_and_vlm.png" alt="Quantitative results" />
-        <p class="content is-size-5 has-text-justified">
-          <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS
-          and NeRF2Physics by 2.2–4.6× in
-          Gemini‑Pro realism while running <em>10³×</em> faster.
-        </p>
+        <!-- <p class="content is-size-5 has-text-justified"> -->
+        <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS
+        and NeRF2Physics by 2.2–4.6× in
+        Gemini‑Pro realism while running <em>10³×</em> faster.
+        <!-- </p> -->
       </figure>
       <br /> <br />
       <!-- Quantitative results -->
       <figure class="image is-fullwidth"><img src="static/images/table_main_results.png" alt="Quantitative results" />
-        <p class="content is-size-5 has-text-justified">
-          <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS
-          and NeRF2Physics by 2.2–4.6× in
-          Gemini‑Pro realism while running <em>10³×</em> faster.
-        </p>
+        <strong>More quantitative results!</strong> We also report perceptual metrics (PSNR, SSIM) against the
+        reference videos in
+        PixieVerse, the VLM Gemini scores, and five other metrics our
+        method optimizes including discrete material accuracy and continuous errors over E, ν, ρ. Standard
+        errors are also included, and best values are <strong>bolded</strong>. Pixie is by far the best performer.
+        2.21-4.58x improvement in VLM score and 3.6-30.3% gains in PSNR and SSIM against competitors!
       </figure>
 
       <!-- 
@@ -294,11 +502,35 @@
         <video style="width:100%;" autoplay muted loop playsinline>
           <source src="static/videos/qual_viz_ours_full_tight.mp4" type="video/mp4" />
         </video>
+        <!-- <p class="content is-size-5 has-text-justified"> -->
+        <strong>What Pixie predicts:</strong> Pixie simultaneously recovers
+        discrete material class , E, ν, ρ with a high degree of accuracy. For example, the model correctly labels
+        labels foliage as elastic and
+        the metal can as rigid, while recovering realistic stiffness and density gradients within each object.
+        <!-- </p> -->
         <video style="width:100%;" autoplay muted loop playsinline>
           <source src="static/videos/combined_panel.mp4" type="video/mp4" />
         </video>
+        <!-- <p class="content is-size-5 has-text-justified"> -->
+        <strong>Pixie against baselines visually:</strong> We visualized the predicted material class and E
+        (left, right respectively) for Pixie and Nerf2Physics, E for DreamPhysics (right), and the
+        plasticity and hyperelastic function classes predicted by OmniPhysGS.
+        Best Gemini score per
+        scene is highlighted 🟢<span class="good-score">Green</span> while low scores are marked 🔴<span
+          class="bad-score">Red</span>.</span>
+        Pixie produces
+        stable, physically plausible motion while DreamPhysics remains overly stiff due to inaccurate finegrained E
+        prediction or too high E, OmniPhysGS collapses under load due to
+        unrealistic combination of plasticity and hyperelastic functions, and NeRF2Physics exhibits noisy
+        artifacts.
+        <!-- </p> -->
+        <div class="tip-banner">
+          <span class="icon"><i class="fas fa-lightbulb"></i></span>
+          <span><strong>Tip:</strong>&nbsp;See the zoom-in lens for some incorrect
+            predictions.
+        </div>
       </div>
-    </div>
+
   </section>
 
 
@@ -349,22 +581,22 @@
         <h2 class="title is-2 has-text-centered">Ablation Study</h2>
         <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid.png" alt="Method overview" />
         </figure>
-        <p class="content is-size-5 has-text-justified">
-          <strong>Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
-          transfer. Incorrect predictions such as leave mislaballed as metal or Young's modulus being uniform within an
-          object are marked with question marks.
+        <!-- <p class="content is-size-5 has-text-justified"> -->
+        <strong>Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
+        transfer. Incorrect predictions such as leave mislaballed as metal or Young's modulus being uniform within an
+        object are marked with question marks.
 
-        </p>
+        <!-- </p> -->
 
 
         <figure class="image is-fullwidth"><img src="static/images/seg_acc_heatmap.png" alt="Method overview" />
         </figure>
-        <p class="content is-size-5 has-text-justified">
-          <strong>Ablation Figure:</strong>
-          It also severely degrades
-          material accuracy (−20‑40 %) and doubles continuous errors shown Table 1, confirming the
-          importance of semantic priors.
-        </p>
+        <!-- <p class="content is-size-5 has-text-justified"> -->
+        <strong>Ablation Figure:</strong>
+        It also severely degrades
+        material accuracy (−20 %) and almost doubles continuous errors shown Table 1, confirming the
+        importance of semantic priors.
+        <!-- </p> -->
 
       </div>
     </div>
@@ -373,32 +605,171 @@
   <!-- ──────────  AUTHORS  ────────── -->
   <section class="section is-small" id="authors">
     <div class="container is-max-desktop">
-      <h3 class="title is-3 has-text-centered">Authors</h3>
-      <div class="is-size-5 publication-authors has-text-centered">
-        <span class="author-block">
-          <a target="_blank" rel="noopener noreferrer" href="https://vlongle.github.io">Long Le</a><sup>1</sup>
-        </span>,
-        <span class="author-block">
-          <a target="_blank" rel="noopener noreferrer" href="https://ryanlucas3.github.io/">Ryan Lucas</a><sup>2</sup>
-        </span>,
-        <span class="author-block">
-          <a target="_blank" rel="noopener noreferrer" href="https://cwchenwang.github.io/">Chen Wang</a><sup>1</sup>
-        </span>,
-        <span class="author-block">
-          <a target="_blank" rel="noopener noreferrer" href="https://czzzzh.github.io/">Chuhao Chen</a><sup>1</sup>
-        </span>,
-        <span class="author-block">
-          <a target="_blank" rel="noopener noreferrer" href="https://www.seas.upenn.edu/~dineshj/">Dinesh
-            Jayaraman</a><sup>1</sup>
-        </span>,
-        <span class="author-block">
-          <a target="_blank" rel="noopener noreferrer" href="https://www.seas.upenn.edu/~eeaton/">Eric
-            Eaton</a><sup>1</sup>
-        </span>,
-        <span class="author-block">
-          <a target="_blank" rel="noopener noreferrer" href="https://lingjie0206.github.io/">Lingjie Liu</a><sup>1</sup>
-        </span><br />
-        <sup>1</sup>University of Pennsylvania <sup>2</sup>MIT
+      <h2 class="title is-3 is-size-4-mobile has-text-centered">Authors</h2>
+
+      <div class="container has-text-centered">
+
+        <!-- Desktop / larger screens -->
+        <div class="publication-authors is-flex is-flex-wrap-wrap is-justify-content-space-around is-hidden-mobile">
+
+          <!-- Long Le -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-128x128">
+              <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/long.png" alt="Long Le" />
+              </a>
+            </figure>
+            <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">Long Le</a><sup>1</sup>
+          </div>
+
+          <!-- Ryan Lucas -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-128x128">
+              <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/ryan.png" alt="Ryan Lucas" />
+              </a>
+            </figure>
+            <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">Ryan Lucas</a><sup>2</sup>
+          </div>
+
+          <!-- Chen Wang -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-128x128">
+              <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/chen.png" alt="Chen Wang" />
+              </a>
+            </figure>
+            <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">Chen Wang</a><sup>1</sup>
+          </div>
+
+          <!-- Chuhao Chen -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-128x128">
+              <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/chuhao.png" alt="Chuhao Chen" />
+              </a>
+            </figure>
+            <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">Chuhao Chen</a><sup>1</sup>
+          </div>
+
+          <!-- Dinesh Jayaraman -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-128x128">
+              <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/dinesh.jpg" alt="Dinesh Jayaraman" />
+              </a>
+            </figure>
+            <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">Dinesh
+              Jayaraman</a><sup>1</sup>
+          </div>
+
+          <!-- Eric Eaton -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-128x128">
+              <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/eric.jpg" alt="Eric Eaton" />
+              </a>
+            </figure>
+            <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">Eric
+              Eaton</a><sup>1</sup>
+          </div>
+
+          <!-- Lingjie Liu -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-128x128">
+              <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/lingjie.jpg" alt="Lingjie Liu" />
+              </a>
+            </figure>
+            <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">Lingjie
+              Liu</a><sup>1</sup>
+          </div>
+        </div>
+
+        <!-- Mobile / tablet -->
+        <div class="is-flex is-flex-wrap-wrap is-justify-content-center is-hidden-tablet">
+          <!-- Re-use the same blocks but with smaller images -->
+
+          <!-- Long Le -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-96x96">
+              <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/long.png" alt="Long Le" />
+              </a>
+            </figure>
+            <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">Long Le</a><sup>1</sup>
+          </div>
+
+          <!-- Ryan Lucas -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-96x96">
+              <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/ryan.png" alt="Ryan Lucas" />
+              </a>
+            </figure>
+            <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">Ryan Lucas</a><sup>2</sup>
+          </div>
+
+          <!-- Chen Wang -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-96x96">
+              <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/chen.png" alt="Chen Wang" />
+              </a>
+            </figure>
+            <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">Chen Wang</a><sup>1</sup>
+          </div>
+
+          <!-- Chuhao Chen -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-96x96">
+              <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/chuhao.png" alt="Chuhao Chen" />
+              </a>
+            </figure>
+            <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">Chuhao Chen</a><sup>1</sup>
+          </div>
+
+          <!-- Dinesh Jayaraman -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-96x96">
+              <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/dinesh.jpg" alt="Dinesh Jayaraman" />
+              </a>
+            </figure>
+            <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">Dinesh
+              Jayaraman</a><sup>1</sup>
+          </div>
+
+          <!-- Eric Eaton -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-96x96">
+              <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/eric.jpg" alt="Eric Eaton" />
+              </a>
+            </figure>
+            <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">Eric
+              Eaton</a><sup>1</sup>
+          </div>
+
+          <!-- Lingjie Liu -->
+          <div class="author-block m-3 has-text-centered">
+            <figure class="image is-96x96">
+              <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">
+                <img class="is-rounded" src="static/images/lingjie.jpg" alt="Lingjie Liu" />
+              </a>
+            </figure>
+            <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">Lingjie
+              Liu</a><sup>1</sup>
+          </div>
+        </div>
+
+        <!-- Affiliations -->
+        <div class="publication-authors mt-4">
+          <span class="author-block"><sup>1</sup>University of Pennsylvania</span>
+          <span class="author-block">&nbsp;&nbsp;<sup>2</sup>MIT</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -421,7 +792,7 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI‑on‑Legs</a>, <a
+        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI-on-Legs</a>, <a
             href="https://www.guangzhaohe.com/canor">Canor</a>, <a href="https://www.garfield.studio/">Garfield</a> and
           <a href="https://nerfies.github.io/">NeRFies</a>.
         </p>
@@ -447,6 +818,60 @@
 
       sections.forEach(section => observer.observe(section));
     });
+  </script>
+
+  <!-- Scroll bar & dark-mode toggle elements -->
+  <div id="scrollbar"></div>
+  <button id="theme-toggle" class="button is-small is-rounded"
+    style="position:fixed;bottom:1rem;right:1rem;z-index:1000;"><i class="fas fa-moon"></i></button>
+
+  <!-- Enhancement scripts -->
+  <script>
+    // Count-up animation (plays every time the element re-enters viewport)
+    document.querySelectorAll('.count-up').forEach(el => {
+      const target = +el.dataset.target;
+      const step = Math.max(1, Math.ceil(target / 60));
+      let animating = false;
+      const obs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && !animating) {
+          animating = true;
+          let n = 0;
+          el.textContent = 0;
+          const id = setInterval(() => {
+            n += step;
+            el.textContent = Math.min(n, target);
+            if (n >= target) clearInterval(id);
+          }, 20);
+        } else if (!entry.isIntersecting) {
+          animating = false; // reset for next time
+          el.textContent = 0;
+        }
+      }, { threshold: 0.4 });
+      obs.observe(el);
+    });
+
+    // Scroll progress bar
+    const bar = document.getElementById('scrollbar');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+      bar.style.width = pct * 100 + '%';
+    });
+
+    // Dark-mode toggle
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // Hero changing Tabler icon
+    const iconClasses = ['ti-leaf', 'ti-droplet', 'ti-bricks', 'ti-wind', 'ti-fire'];
+    let ii = 0;
+    setInterval(() => {
+      ii = (ii + 1) % iconClasses.length;
+      const ic = document.getElementById('changing-icon');
+      if (ic) ic.className = 'ti ' + iconClasses[ii];
+    }, 1200);
   </script>
 </body>
 
