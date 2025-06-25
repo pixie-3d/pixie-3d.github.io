@@ -365,7 +365,9 @@
           fields</em> of physical properties in a single forward pass, enabling real‑time
         physics simulations.
       </p>
-      <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" />
+      <!-- <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" /> -->
+              <figure class="image is-fullwidth"><img src="static/images/teaser_low_res.png" alt="Quantitative results" />
+
     </div>
   </section>
 
@@ -432,7 +434,9 @@
   <section id="method" class="section is-medium">
     <div class="container is-max-desktop">
       <h2 class="title is-2 has-text-centered">Method Overview</h2>
-      <figure class="image is-fullwidth"><img src="static/images/method_overview.png" alt="Method overview" /></figure>
+      <!-- <figure class="image is-fullwidth"><img src="static/images/method_overview.png" alt="Method overview" /></figure> -->
+        <figure class="image is-fullwidth"><img src="static/images/method_overview_low_res.png" alt="Method overview" /></figure>
+
       <p class="content is-size-5 has-text-justified">
         Multi‑view posed RGB images are encoded by a NeRF with distilled CLIP features yielding a 3D feature grid. A
         3D U‑Net predicts material fields that are transferred onto Gaussian splats and simulated with an Material Point
@@ -458,7 +462,8 @@
       <a href="https://gemini.google.com/app">Gemini-Pro-2.5</a> is used to evaluate the realism and score the
       candidates.
       <!-- Quantitative results -->
-      <figure class="image is-fullwidth"><img src="static/images/fig_runtime_and_vlm.png" alt="Quantitative results" />
+      <!-- <figure class="image is-fullwidth"><img src="static/images/fig_runtime_and_vlm.png" alt="Quantitative results" /> -->
+
         <!-- <p class="content is-size-5 has-text-justified"> -->
         <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS
         and NeRF2Physics by 2.2–4.6× in
@@ -579,7 +584,9 @@
     <div class="container is-max-desktop">
       <div class="container is-max-desktop">
         <h2 class="title is-2 has-text-centered">Ablation Study</h2>
-        <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid.png" alt="Method overview" />
+<!--         <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid.png" alt="Method overview" />
+        </figure>
+ -->                <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid_low_res.png" alt="Method overview" />
         </figure>
         <!-- <p class="content is-size-5 has-text-justified"> -->
         <strong>Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
