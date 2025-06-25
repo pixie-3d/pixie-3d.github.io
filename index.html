@@ -314,8 +314,8 @@
       <div class="container has-text-centered">
         <h1 class="title is-1 publication-title is-size-1-mobile"
           style="font-size:7vw; line-height:1.1; width:100%; max-width:100%;">
-          <i id="changing-icon" class="ti ti-leaf"
-            style="font-size:1em; vertical-align:middle; margin-right:0.15em;"></i>
+          <!-- <i id="changing-icon" class="ti ti-leaf"
+            style="font-size:1em; vertical-align:middle; margin-right:0.15em;"></i> -->
           <span class="gradient-text">Pixie</span><br />
           <span>Physics from Pixels</span>
         </h1>
@@ -355,7 +355,10 @@
   <!-- ──────────  INTRODUCTION  ────────── -->
   <section id="intro" class="section is-medium">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Why learn physics fields?</h2>
+      <h2 class="title is-2 has-text-centered">
+        <i id="changing-icon" class="ti ti-leaf" style="font-size:1em; vertical-align:middle; margin-right:0.15em;"></i>
+        Why learn physics fields?
+      </h2>
       <p class="content is-size-5 has-text-justified">
         Photorealistic 3D reconstructions (NeRF, Gaussian Splatting) capture geometry &amp; appearance but <em>lack
           physics</em>. This limits 3D reconstruction to static scenes. Recently, there has been a surge of
@@ -434,7 +437,9 @@
   <!-- ──────────  METHOD  ────────── -->
   <section id="method" class="section is-medium">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Method Overview</h2>
+
+      <h2 class="title is-2 has-text-centered">
+        Method Overview</h2>
       <!-- <figure class="image is-fullwidth"><img src="static/images/method_overview.png" alt="Method overview" /></figure> -->
       <figure class="image is-fullwidth"><img src="static/images/method_overview_low_res.png" alt="Method overview" />
       </figure>
@@ -877,7 +882,16 @@
     });
 
     // Hero changing Tabler icon
-    const iconClasses = ['ti-leaf', 'ti-droplet', 'ti-bricks', 'ti-wind', 'ti-fire'];
+    const iconClasses = [
+      'ti-leaf',     // plant
+      // 'ti-droplet',  // water
+      'ti-wind',     // air
+      'ti-magnet',        // gravity
+      'ti-snowflake',// snow      ← NEW
+      'ti-grain',     // sand      ← NEW
+      // 'ti-hourglass-low',  // sand
+    ];
+
     let ii = 0;
     setInterval(() => {
       ii = (ii + 1) % iconClasses.length;
