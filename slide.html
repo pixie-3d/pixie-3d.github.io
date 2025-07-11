@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pixie – Slides</title>
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+    <style>
+        /* Make video fill the slide nicely */
+        .reveal video {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Base black background for deck; individual slides override */
+        html,
+        body,
+        .reveal {
+            background: #000;
+        }
+
+        /* Dark slide (first) */
+        .dark-bg {
+            background: #000 !important;
+            color: #fff;
+        }
+
+        /* White background slide */
+        .white-bg {
+            background: #ffffff !important;
+            color: #111;
+        }
+
+        /* Position and style slide number (e.g., 1 / N) */
+        .reveal .slide-number {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        /* Gradient animated text for fancy headings */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%
+            }
+
+            100% {
+                background-position: 100% 50%
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #ff6ec4, #7873f5, #ff6ec4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: gradientShift 6s linear infinite;
+        }
+
+        /* Light background (matches has-background-light) for alternating slides */
+        .reveal section.light-bg {
+            background: #f5f5f5 !important;
+            color: #111;
+        }
+
+        /* PixieVerse dataset layout */
+        .dataset-flex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 32px;
+            margin-top: 1.5rem;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Video container: occupy ~70% width on large screens */
+        .dataset-video {
+            flex: 1 1 65%;
+            max-width: 1100px;
+            min-width: 500px;
+        }
+
+        .dataset-video video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Stat grid: responsive 2x2 layout */
+        .dataset-grid {
+            flex: 0 1 30%;
+            min-width: 260px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 24px 32px;
+            justify-items: center;
+        }
+
+        .dataset-box {
+            flex: 0 0 45%;
+            text-align: center;
+        }
+
+        .dataset-heading {
+            font-size: 1rem;
+            letter-spacing: .03em;
+            color: #555;
+            margin-bottom: .25rem;
+        }
+
+        .dataset-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- First slide: embedded video -->
+            <section class="dark-bg">
+                <video src="pixie_gradient.mp4" playsinline autoplay muted loop></video>
+            </section>
+
+            <!-- Slide 2: Motivation / Introduction -->
+            <section class="white-bg" data-background-color="#ffffff">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Why learn physics fields?</h2>
+                <ul
+                    style="font-size: 1.2rem; text-align: left; margin: 0 auto 1rem auto; width: 90%; line-height: 1.4;">
+                    <li class="fragment">Photorealistic 3D reconstructions (NeRF, GS) capture geometry
+                        &amp; appearance but <em>lack physics</em>.</li>
+                    <li class="fragment">Existing test-time optimisation methods are slow and scene-specific.</li>
+                    <li class="fragment"><strong>Pixie</strong> predicts dense material fields in a single forward pass
+                        → real-time simulation.</li>
+                </ul>
+                <img src="static/images/teaser_low_res.png" style="width: 80%; border-radius: 8px; margin-top: 30px;" />
+            </section>
+
+            <!-- Slide 3: PixieVerse Dataset -->
+            <section class="light-bg" data-background-color="#f5f5f5" data-background-transition="none">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">PixieVerse Dataset</h2>
+                <!-- <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Large-scale synthetic benchmark for visual-physics learning.</li>
+                    <li class="fragment">1,600+ assets across 10 semantic super-classes.</li>
+                    <li class="fragment">Voxel-level annotations of material ID, Young's modulus (E), Poisson ν and
+                        density (ρ).</li>
+                </ul> -->
+                <div class="dataset-flex">
+                    <div class="dataset-video">
+                        <video autoplay muted loop playsinline>
+                            <source src="static/videos/cam360.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                    <div class="dataset-grid">
+                        <div class="dataset-box">
+                            <p class="dataset-heading">Assets</p>
+                            <p class="dataset-number"><span class="count-up" data-target="1624">0</span></p>
+                        </div>
+                        <div class="dataset-box">
+                            <p class="dataset-heading">Super-classes</p>
+                            <p class="dataset-number"><span class="count-up" data-target="10">0</span></p>
+                        </div>
+                        <div class="dataset-box">
+                            <p class="dataset-heading">Material Models</p>
+                            <p class="dataset-number"><span class="count-up" data-target="6">0</span></p>
+                        </div>
+                        <div class="dataset-box">
+                            <p class="dataset-heading">Annotations</p>
+                            <p class="dataset-number">E, ν, ρ, ID</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Method Overview -->
+            <section class="white-bg">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Method Overview</h2>
+                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Multi-view RGB encoded by NeRF with distilled CLIP features.</li>
+                    <li class="fragment">3D U-Net predicts dense material fields.</li>
+                    <li class="fragment">Gaussian splats + MPM solver yield real-time simulations.</li>
+                </ul>
+                <img class="fragment" src="static/images/method_overview_low_res.png"
+                    style="width:80%; border-radius:8px; margin-top:30px;" />
+            </section>
+
+            <!-- Slide 5: Quantitative Results -->
+            <section class="white-bg" data-background-color="#ffffff">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Quantitative Results</h2>
+                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">2.2–4.6× higher Gemini-Pro realism than baselines.</li>
+                    <li class="fragment">Runs <em>10³×</em> faster than optimisation-heavy methods.</li>
+                    <li class="fragment">State-of-the-art PSNR / SSIM gains on PixieVerse.</li>
+                </ul>
+                <img class="fragment" src="static/images/fig_runtime_and_vlm.png"
+                    style="width:80%; border-radius:8px; margin-top:30px;" />
+            </section>
+
+
+
+            <!-- Slide 6: Qualitative Results -->
+            <section class="light-bg" data-background-color="#f5f5f5">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Qualitative Results</h2>
+                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Pixie simultaneously recovers
+                        discrete material class , E, ν, ρ with a high degree of accuracy.
+                    </li>
+                </ul>
+                <video class="fragment"
+                    style="max-height:55vh; max-width:70%; width:auto; border-radius:8px; margin-top:30px;" autoplay
+                    muted loop playsinline>
+                    <source src="static/videos/qual_viz_ours_full_tight.mp4" type="video/mp4" />
+                </video>
+            </section>
+
+
+
+            <!-- Slide 6: Qualitative Results -->
+            <section class="light-bg" data-background-color="#f5f5f5">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Qualitative Results</h2>
+                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Pixie produces stable, physically plausible motion and correct material
+                        attribution.</li>
+                    <li class="fragment">Baselines suffer from stiffness errors, collapse, or noisy artefacts.</li>
+                </ul>
+                <video class="fragment"
+                    style="max-height:55vh; max-width:70%; width:auto; border-radius:8px; margin-top:30px;" autoplay
+                    muted loop playsinline>
+                    <source src="static/videos/combined_panel.mp4" type="video/mp4" />
+                </video>
+            </section>
+
+            <!-- Slide 7: Real-world Transfer -->
+            <section class="light-bg" data-background-color="#f5f5f5">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Zero-shot Transfer to Real
+                    Scenes</h2>
+                <!-- <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Works on captured NeRF scenes with no retraining.</li>
+                </ul> -->
+                <video style="width:80%; border-radius:8px; margin-top:30px;" autoplay muted loop playsinline>
+                    <source src="static/videos/ours_real_world/real_demo_combined.mp4" type="video/mp4" />
+                </video>
+            </section>
+
+            <!-- Slide 8: Conclusion & Citation -->
+            <section class="black-bg" data-background-color="#ffffff">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Conclusion</h2>
+                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Pixie bridges 3D vision and physics with real-time, accurate and generalizable
+                        inference.</li>
+                    <li class="fragment"><strong>Project
+                            Website:</strong> <a href="https://pixie-3d.github.io" target="_blank"
+                            style="color: #7873f5; text-decoration: none;">pixie-3d.github.io</a>
+                    </li>
+                </ul>
+                <pre class="fragment"
+                    style="font-size:0.9rem; background:#111; color:#eee; padding:12px; border-radius:6px; width:80%; margin:30px auto; overflow-x:auto;"><code>@inproceedings{le2025pixie,
+  title={{Pixie}: Fast and Generalizable Supervised 3D Physics Learning from Pixels},
+  author={Le, Long and Lucas, Ryan and Wang, Chen and Chen, Chuhao and Jayaraman, Dinesh and Eaton, Eric and Liu, Lingjie},
+  year={2025}
+}</code></pre>
+            </section>
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,      // Allow slide navigation via URL hash
+            slideNumber: true,
+            controls: true,
+            progress: true
+        });
+
+        /* Count-up animation when the dataset slide becomes active */
+        function animateCounts(slide) {
+            slide.querySelectorAll('.count-up').forEach(el => {
+                if (el.dataset.done) return;
+                const target = +el.dataset.target;
+                const step = Math.max(1, Math.ceil(target / 60));
+                let n = 0;
+                el.textContent = 0;
+                el.dataset.done = true;
+                const id = setInterval(() => {
+                    n += step;
+                    if (n >= target) {
+                        n = target;
+                        clearInterval(id);
+                    }
+                    el.textContent = n;
+                }, 20);
+            });
+        }
+
+        Reveal.on('slidechanged', event => {
+            animateCounts(event.currentSlide);
+        });
+
+        // Trigger counts if starting on dataset slide via hash
+        animateCounts(Reveal.getCurrentSlide());
+    </script>
+</body>
+
+</html>
