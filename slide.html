@@ -309,12 +309,41 @@
             });
         }
 
+        // Video management function
+        function manageVideos(currentSlide, previousSlide) {
+            // Pause all videos when leaving a slide
+            if (previousSlide) {
+                const prevVideos = previousSlide.querySelectorAll('video');
+                prevVideos.forEach(video => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            }
+
+            // Play videos when entering a slide
+            if (currentSlide) {
+                const currentVideos = currentSlide.querySelectorAll('video');
+                currentVideos.forEach(video => {
+                    // Reset and restart the video
+                    video.currentTime = 0;
+                    video.play().catch(e => {
+                        // Ignore autoplay errors (browsers may block autoplay)
+                        console.log('Video autoplay blocked:', e);
+                    });
+                });
+            }
+        }
+
         Reveal.on('slidechanged', event => {
             animateCounts(event.currentSlide);
+            manageVideos(event.currentSlide, event.previousSlide);
         });
 
         // Trigger counts if starting on dataset slide via hash
         animateCounts(Reveal.getCurrentSlide());
+
+        // Also manage videos on initial load
+        manageVideos(Reveal.getCurrentSlide(), null);
     </script>
 </body>
 
