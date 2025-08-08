@@ -284,10 +284,11 @@
     margin-top: 0px;
     margin-bottom: 0px;
     text-align: center;
-    background-color: white;
+    background-color: #0a0a0a;
     border-radius: 15px;
     -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
     overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0,0,0,.45);
 }
 
 /* #main-results > div {
@@ -392,8 +393,8 @@ input:checked+.slider:before {
 /* Pixie-specific: ensure GARField switcher wins over Bulma */
 #real #main-results .switcher {
     width: 100%;
-    background: var(--blue-light);
-    border: 1.5px solid var(--blue-mid);
+    background: #1a1a1a;
+    border: 1.5px solid #333;
     border-radius: 10px;
     padding: 0.8em 1.2em;
     margin: 0.5em 0 1em;
@@ -413,42 +414,50 @@ input:checked+.slider:before {
     /* remove Bulma's bottom margin */
     font-size: 16px;
     cursor: pointer;
+    /* padding: 0.7em 0.7em;
+    border-radius: 999px; */
 }
 
 #real .results-slide-row {
     display: flex;
-    overflow-x: scroll;
+    overflow-x: hidden; /* re-enable when we have more scenes */
+    justify-content: center;
+    gap: 18px;
     scroll-behavior: smooth;
-    height: 140px;
-    width: 88%;
+    width: 100%;
+    height: 170px; /* ensure image + label fit without scrolling */
     margin-left: auto;
     margin-right: auto;
+    padding: 8px 0 12px;
 }
 
 #real .thumbnail-btn {
-    flex: 0 0 140px;
-    /* same as GARField col size */
-    margin: 0 6px;
-    /* small gap between thumbnails */
-    background: var(--blue-light);
+    flex: 0 0 200px; /* rectangular card spanning more width */
+    margin: 0;
+    background: transparent;
+    border: 0;
+    transition: transform 0.2s ease;
 }
 
 #real .thumbnails {
     width: 100% !important;
-    /* fill button */
-    height: 100px;
+    height: 120px; /* rectangular aspect, shorter to avoid scrolling */
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 14px;
+    display: block;
+    transition: box-shadow .2s ease, outline-color .2s ease;
 }
 
 #real .switcher .switcher-labels label {
     font-size: 18px;
     font-weight: 600;
+    color: white;
 }
 
 #real .switcher .switcher-labels label:first-child {
     font-size: 18px;
     font-weight: 700;
+    color: white;
     /* title bold */
 }
 
@@ -456,19 +465,29 @@ input:checked+.slider:before {
     transform: scale(1.4);
     /* bigger circles */
     margin-right: 0.6em;
+    accent-color: #7873f5;
+}
+
+/* Keep selection indicated by the radio only (no extra label highlight) */
+#real .switcher input[type="radio"]:checked + label {
+    background: transparent;
+    border: none;
 }
 
 #real .thumbnail_label {
     font-size: 18px;
+    color: white;
+    display: block;
+    margin-top: 8px;
 }
 
 #real .image-compare-handle i {
     font-size: 30px;
     line-height: 2.5em;
     width: 2.5em;
-    background: var(--blue-mid);
+    background: linear-gradient(180deg, #2b2b2b, #1f1f1f);
     color: #fff;
-    box-shadow: 0 0 6px rgba(0, 0, 0, .25);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .55);
 }
 
 #real .image-compare-before>div,
@@ -482,6 +501,9 @@ input:checked+.slider:before {
     font-size: 18px !important;
     font-weight: 600;
     padding: 0.25em 0.9em;
+    background: white !important;
+    color: black !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 #real .fa-arrows-alt,
@@ -497,32 +519,44 @@ input:checked+.slider:before {
     width: 48px;
     height: 48px;
     padding: 10px !important;
-    background-color: var(--blue-mid) !important;
+    background-color: #333 !important;
 }
 
 #real #play-btn:hover {
-    background-color: var(--blue-dark) !important;
+    background-color: #555 !important;
 }
 
 /* ─── Pixie colour refresh ─────────────────────────── */
 #real .results-slide-arrow,
 #real .video-btn {
-    background-color: var(--blue-mid);
+    background-color: #222;
     color: #fff;
-    transition: background-color .2s;
+    transition: background-color .2s, transform .15s ease-out, box-shadow .2s;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
 }
 
 #real .results-slide-arrow:hover,
 #real .video-btn:hover {
-    background-color: var(--blue-dark);
+    background-color: #3a3a3a;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.45);
 }
 
-#real .thumbnail-btn:hover {
-    background: var(--blue-mid);
+#real .thumbnail-btn:hover .thumbnails {
+    box-shadow: 0 8px 22px rgba(0,0,0,.45);
 }
 
 #real .switcher .switcher-labels>label:first-child {
     font-size: 20px !important;
     font-weight: 700 !important;
     margin-right: 1.2em;
+    color: white !important;
+}
+
+/* Active thumbnail state — highlight image directly */
+#real .thumbnail-btn.active .thumbnails {
+    outline: 3px solid #7873f5;
+    outline-offset: -3px;
+    box-shadow: 0 10px 26px rgba(120,115,245,.35);
 }

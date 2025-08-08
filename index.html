@@ -581,10 +581,10 @@
 
 
   <!-- ──────────  REAL WORLD  ────────── -->
-  <section id="real" class="section is-medium">
+  <section id="real" class="section is-medium" style="background-color: #000000; color: white;">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Zero-shot Transfer to Real Scenes</h2>
-      <p class="content is-size-5 has-text-justified">Interactively explore Pixie's material predictions on captured
+      <h2 class="title is-2 has-text-centered" style="color: white;">Zero-shot Transfer to Real Scenes</h2>
+      <p class="content is-size-5 has-text-justified" style="color: #e0e0e0;">Interactively explore Pixie's material predictions on captured
         NeRF scenes. Drag the slider to compare input RGB with predicted physics fields, switch feature views, and
         pick different scenes via thumbnails.</p>
       <div id="main-results">
@@ -605,16 +605,20 @@
           </div>
         </div>
         <div>
+          <!-- Carousel arrows temporarily disabled until we have more scenes
           <button class="results-slide-arrow" id="results-slide-arrow-prev"
             onclick="results_slide_left()">&#8249;</button>
+          -->
           <div class="results-slide-row" id="results-objs-scroll">
             <div data-img-src="static/videos/ours_real_world/renders/bouquet/thumbnail.jpg" data-label="Bouquet"></div>
             <div data-img-src="static/videos/ours_real_world/renders/bonsai/thumbnail.jpg" data-label="Bonsai"></div>
             <div data-img-src="static/videos/ours_real_world/renders/vasedeck/thumbnail.jpg" data-label="Vasedeck">
             </div>
           </div>
+          <!--
           <button class="results-slide-arrow" id="results-slide-arrow-next"
             onclick="results_slide_right()">&#8250;</button>
+          -->
         </div>
       </div>
     </div>

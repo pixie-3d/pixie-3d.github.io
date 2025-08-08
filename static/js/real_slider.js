@@ -234,6 +234,9 @@ $(function () {
         $row.children().each((childIdx, child) => {
             const $child = $(child);
             const btn = $("<button>", { class: "thumbnail-btn" }).on("click", () => {
+                // mark active thumbnail
+                $(".thumbnail-btn").removeClass("active");
+                btn.addClass("active");
                 currentVideoIdx = childIdx;
                 const vid = videos[currentVideoIdx];
                 vid.currentTime = 0;
@@ -241,9 +244,14 @@ $(function () {
                 update_play_icon();
             });
             const img = $("<img>", { class: "thumbnails", src: $child.data("img-src"), alt: $child.data("label") });
-            const label = $("<label>", { class: "thumbnail_label", text: $child.data("label") });
+            const label = $("<span>", { class: "thumbnail_label", text: $child.data("label") });
             btn.append(img, label);
             $row.append(btn);
+
+            // set the first thumbnail as active by default
+            if (childIdx === 0) {
+                btn.addClass("active");
+            }
         });
     });
 });
