@@ -8,6 +8,22 @@
   <meta name="keywords" content="Pixie, 3D Physics, CLIP, Gaussian Splatting, MPM, Computer Graphics, NeRF" />
   <title>Pixie: 3D Physics from Pixels</title>
 
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pixie-3d.github.io/" />
+  <meta property="og:title" content="Pixie: 3D Physics from Pixels" />
+  <meta property="og:description"
+    content="Pixie trains a neural network that maps pretrained visual features (i.e., CLIP) to dense material fields of physical properties in a single forward pass, enabling real‑time physics simulations." />
+  <meta property="og:image" content="https://pixie-3d.github.io/static/images/preview.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://pixie-3d.github.io/" />
+  <meta property="twitter:title" content="Pixie: 3D Physics from Pixels" />
+  <meta property="twitter:description"
+    content="Pixie trains a neural network that maps pretrained visual features (i.e., CLIP) to dense material fields of physical properties in a single forward pass, enabling real‑time physics simulations." />
+  <meta property="twitter:image" content="https://pixie-3d.github.io/static/images/preview.png" />
+
   <!-- FONTS & ICONS -->
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
   <link rel="stylesheet" href="./static/css/bulma.min.css" />
@@ -386,8 +402,7 @@
           fields</em> of physical properties in a single forward pass, enabling real‑time
         physics simulations.
       </p>
-      <!-- <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" /> -->
-      <figure class="image is-fullwidth"><img src="static/images/teaser_low_res.png" alt="Quantitative results" />
+      <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" />
 
     </div>
   </section>
@@ -565,10 +580,10 @@
 
 
   <!-- ──────────  REAL WORLD  ────────── -->
-  <section id="real" class="section is-medium">
+  <section id="real" class="section is-medium" style="background-color: #000000; color: white;">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Zero-shot Transfer to Real Scenes</h2>
-      <p class="content is-size-5 has-text-justified">Interactively explore Pixie's material predictions on captured
+      <h2 class="title is-2 has-text-centered" style="color: white;">Zero-shot Transfer to Real Scenes</h2>
+      <p class="content is-size-5 has-text-justified" style="color: #e0e0e0;">Interactively explore Pixie's material predictions on captured
         NeRF scenes. Drag the slider to compare input RGB with predicted physics fields, switch feature views, and
         pick different scenes via thumbnails.</p>
       <div id="main-results">
@@ -589,16 +604,20 @@
           </div>
         </div>
         <div>
+          <!-- Carousel arrows temporarily disabled until we have more scenes
           <button class="results-slide-arrow" id="results-slide-arrow-prev"
             onclick="results_slide_left()">&#8249;</button>
+          -->
           <div class="results-slide-row" id="results-objs-scroll">
             <div data-img-src="static/videos/ours_real_world/renders/bouquet/thumbnail.jpg" data-label="Bouquet"></div>
             <div data-img-src="static/videos/ours_real_world/renders/bonsai/thumbnail.jpg" data-label="Bonsai"></div>
             <div data-img-src="static/videos/ours_real_world/renders/vasedeck/thumbnail.jpg" data-label="Vasedeck">
             </div>
           </div>
+          <!--
           <button class="results-slide-arrow" id="results-slide-arrow-next"
             onclick="results_slide_right()">&#8250;</button>
+          -->
         </div>
       </div>
     </div>

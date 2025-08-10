@@ -88,6 +88,111 @@
             margin-right: auto;
         }
 
+        /* Related-work layout */
+        .related-flex {
+            display: block;
+            /* single large diagram */
+            width: 95%;
+            margin: 1.5rem auto 0 auto;
+            position: relative;
+        }
+
+        .related-text {
+            width: 100%;
+        }
+
+        .related-video {
+            position: absolute;
+            top: 7%;
+            /* 35/500 */
+            left: 65%;
+            /* 650/1000 */
+            width: 30%;
+            /* 300/1000 */
+            z-index: 10;
+        }
+
+        .related-video video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Diagram styles */
+        .diagram-node rect {
+            fill: #fff;
+            stroke: #333;
+            stroke-width: 2;
+            rx: 6px;
+            ry: 6px;
+        }
+
+        .diagram-node text {
+            fill: #111;
+            font-weight: 600;
+            font-size: 14px;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+
+        .diagram-node.active rect {
+            fill: transparent;
+            stroke: #7873f5;
+            stroke-width: 3;
+        }
+
+        .diagram-node.active text {
+            fill: #fff;
+        }
+
+        .arrow-path {
+            stroke: #999;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+
+        .arrow-path.active {
+            stroke: #7873f5;
+            stroke-width: 3;
+        }
+
+        .arrow-label {
+            fill: #666;
+            font-size: 12px;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+
+        .arrow-label.active {
+            fill: #7873f5;
+            font-weight: 600;
+        }
+
+        .backprop-arrow-path {
+            stroke: #e47ad3;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 6, 4;
+            marker-end: url(#arrowhead);
+        }
+
+        .backprop-arrow-path.active {
+            stroke: #d944c3;
+            stroke-width: 3;
+        }
+
+        .backprop-arrow-label {
+            fill: #b363a6;
+            font-size: 12px;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+
+        .backprop-arrow-label.active {
+            fill: #d944c3;
+            font-weight: 600;
+        }
+
         /* Video container: occupy ~70% width on large screens */
         .dataset-video {
             flex: 1 1 65%;
@@ -135,19 +240,274 @@
         <div class="slides">
             <!-- First slide: embedded video -->
             <section class="dark-bg">
-                <video src="pixie_gradient.mp4" playsinline autoplay loop controls></video>
+                <video src="pixie_gradient.mp4" playsinline controls></video>
+                <aside class="notes">
+                    Welcome everyone! Today we're going to talk about Pixie, a new method for learning 3D physics from
+                    pixels.
+                    Let's start with a quick look at what we're building towards...
+                </aside>
             </section>
 
             <!-- Slide 2: Motivation / Introduction -->
             <section class="white-bg" data-background-color="#ffffff">
+
+                <aside class="notes">
+                    <ul>
+
+                        <li>
+                            So, we have these amazing photorealistic 3D models from methods like NeRF and Gaussian
+                            Splatting.
+                            They look great. Now, you can take your phone around, take a bunch of photos of your living
+                            room,
+                            put them in a computer,
+                            and we can lift your 2D images into a 3D virtual world.
+                        </li>
+
+                        <li>
+                            They're great but they're static,
+                            The core
+                            question we're tackling is: how can we bring these scenes to life?
+                        </li>
+                        <li>
+                            So can we integrate physics? Maybe if they can also understand physics, we can then make
+                            them move and
+                            interact realistically?
+                        </li>
+
+                    </ul>
+
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Why learn physics fields?</h2>
                 <ul
                     style="font-size: 1.2rem; text-align: left; margin: 0 auto 1rem auto; width: 90%; line-height: 1.4;">
-                    <li class="fragment">Photorealistic 3D reconstructions (NeRF, GS) capture geometry
+                    <li class="fragment">Photorealistic 3D reconstructions (NeRF, GS) capture <em>static</em> geometry
                         &amp; appearance but <em>lack physics</em>.</li>
-                    <li class="fragment">Existing test-time optimisation methods are slow and scene-specific.</li>
-                    <li class="fragment"><strong>Pixie</strong> predicts dense material fields in a single forward pass
+                    <li class="fragment">How can we make the scene <em>move</em>?</li>
+                    <li class="fragment">Can we integrate physics?</li>
+                    <!-- <li class="fragment"><strong>Yes!</strong> By tagging physics params to each 3D coordinate (along
+                        with
+                        color + opacity).</li>
+                    <li class="fragment"><strong>Ok, but how?</strong></li> -->
+
+                    <!-- <li class="fragment">Existing test-time optimisation methods are slow and scene-specific.</li> -->
+                    <!-- <li class="fragment"><strong>Pixie</strong> predicts dense material fields in a single forward pass
+                        → real-time simulation.</li> -->
+                </ul>
+                <img src="static/videos/fox.gif" style="width: 50%; border-radius: 8px; margin-top: 30px;" />
+            </section>
+
+            <section class="white-bg" data-background-color="#ffffff">
+
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Rendering + Physics</h2>
+                <ul
+                    style="font-size: 1.2rem; text-align: left; margin: 0 auto 1rem auto; width: 90%; line-height: 1.4;">
+                    <aside class="notes">
+                        <ul>
+                            <li>
+
+                                The answer is yes! By tagging physics params to each 3D coordinate.
+                            </li>
+                            <li>
+                                The key idea is to augment the existing 3D representation.
+                            </li>
+
+                            <li>
+                                Just like in NeRF or GS where each point has
+                                color
+                                and
+                                opacity,
+                            </li>
+                            <li>
+
+                                we can also tag it with physical properties—like its stiffness or mass density.
+                            </li>
+                            <li>
+
+                                Once we
+                                have these physics-aware points, we can hand them off to a physics simulator
+                                like MPM
+                                to
+                                actually compute the motion. This gives us a dynamic, interactive scene.
+                            </li>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <li class="fragment" data-fragment-index="1"><strong>Yes!</strong> By tagging physics params to each
+                        3D coordinate.</li>
+                    <li class="fragment" data-fragment-index="5">Can simulate the scene with a physics solver (e.g.,
+                        MPM).</li>
+                </ul>
+                <div style="position: relative; width: 100%; margin-top: 30px;">
+                    <img src="static/images/3d_pres.png" style="width: 100%; border-radius: 8px; visibility: hidden;" />
+                    <img src="static/images/3d_pres.png" class="fragment" data-fragment-index="2"
+                        style="width: 100%; border-radius: 8px; position: absolute; top: 0; left: 0;" />
+                    <img src="static/images/3d_pres_2.png" class="fragment" data-fragment-index="3"
+                        style="width: 100%; border-radius: 8px; position: absolute; top: 0; left: 0;" />
+                    <img src="static/images/3d_pres_3.png" class="fragment" data-fragment-index="4"
+                        style="width: 100%; border-radius: 8px; position: absolute; top: 0; left: 0;" />
+                </div>
+            </section>
+
+            <!-- Slide 6: Related Work (Differentiable Physics Optimisation) -->
+            <section class="white-bg" data-slide="related-work" data-background-color="#ffffff">
+                <aside class="notes">
+                    So, how have people tried to solve this before? One popular approach is test-time
+                    optimization. The
+                    idea is to take a single scene, make a random guess about its physics, and then iteratively
+                    refine
+                    that guess using a differentiable physics engine. As the animation shows, you run a
+                    simulation, get
+                    a score, and backpropagate the error to update your parameters.
+                    <ul>
+                        <li>
+                            While reasonable, this sort of method is
+                        </li>
+                        <li>
+
+                            slow. can take hours for one scene</li>
+                        </li>
+                        <li>
+                            —and the results don't generalize to new objects.
+                            You have to
+                            start
+                            from
+                            scratch every time.
+                        </li>
+                        <li>
+                            They're also not very accurate. Typically need good initialization for it to converge to a
+                            reasonable result.
+                        </li>
+                    </ul>
+                </aside>
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Related Work: Test-time
+                    Optimisation</h2>
+
+                <ul
+                    style="font-size: 1.2rem; text-align: left; margin: 0 auto 1rem auto; width: 90%; line-height: 1.4;">
+                    <li class="fragment">Test-time optimization methods are:</li>
+                    <ul>
+                        <li class="fragment">slow.</li>
+                        <li class="fragment">scene-specific.</li>
+                        <li class="fragment">inaccurate (need good initialization).</li>
+                    </ul>
+                </ul>
+                <div class="related-flex">
+                    <div class="related-text">
+                        <!-- Visual optimisation loop diagram -->
+                        <svg viewBox="0 0 1000 500" width="100%" height="500" id="opt-diagram">
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5"
+                                    orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#999" />
+                                </marker>
+                            </defs>
+
+                            <!-- Nodes -->
+                            <!-- Phys Guess -->
+                            <g id="node-0" class="diagram-node">
+                                <rect x="50" y="150" width="200" height="70" />
+                                <text x="150" y="185">Phys. Guess θ</text>
+                            </g>
+
+                            <!-- MPM -->
+                            <g id="node-1" class="diagram-node">
+                                <rect x="350" y="150" width="200" height="70" />
+                                <text x="450" y="185">MPM </text>
+                            </g>
+
+                            <!-- Reward / Loss -->
+                            <g id="node-3" class="diagram-node">
+                                <rect x="350" y="400" width="200" height="70" />
+                                <text x="450" y="435">Reward / Loss</text>
+                            </g>
+
+                            <!-- Predicted Video node: rect and embedded video -->
+                            <g id="node-2" class="diagram-node">
+                                <!-- Placeholder for the overlaid video -->
+                                <rect x="650" y="35" width="300" height="300" fill="none" stroke="#333" stroke-width="2"
+                                    rx="6" ry="6" />
+                            </g>
+
+                            <!-- Arrows -->
+                            <!-- Guess -> MPM -->
+                            <g id="arrow-0">
+                                <path class="arrow-path" d="M250 170 H 350" />
+                                <text class="arrow-label" x="300" y="155">Forward</text>
+                            </g>
+
+                            <!-- MPM -> Video -->
+                            <g id="arrow-1">
+                                <path class="arrow-path" d="M550 170 H 650" />
+                                <text class="arrow-label" x="600" y="155">Render</text>
+                            </g>
+
+                            <!-- Video -> Loss -->
+                            <g id="arrow-2">
+                                <path class="arrow-path" d="M800 335 V 435 H 550" />
+                                <text class="arrow-label" x="675" y="385">Score</text>
+                            </g>
+
+                            <!-- Backward arrows for backpropagation -->
+                            <!-- Loss -> Video -->
+                            <g id="b-arrow-0">
+                                <path class="backprop-arrow-path" d="M550 450 H 900 V 335" />
+                                <text class="backprop-arrow-label" x="675" y="465">∇ Gradient</text>
+                            </g>
+
+                            <!-- Video -> MPM -->
+                            <g id="b-arrow-1">
+                                <path class="backprop-arrow-path" d="M650 220 H 550" />
+                            </g>
+                            <!-- MPM -> Guess -->
+                            <g id="b-arrow-2">
+                                <path class="backprop-arrow-path" d="M350 210 H 250" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="related-video">
+                        <div style="position:relative;width:100%;height:100%;">
+                            <video id="svd-video" muted playsinline></video>
+                            <div id="svd-t-label"
+                                style="position:absolute;bottom:8px;right:8px;padding:2px 6px;background:rgba(0,0,0,0.6);color:#fff;font-size:14px;border-radius:4px;pointer-events:none;">
+                                t=0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Slide 2: Motivation / Introduction -->
+            <section class="white-bg" data-background-color="#ffffff">
+                <aside class="notes">
+                    This is where Pixie comes in.
+
+                    <ul>
+                        <li>
+                            Instead of optimizing for every single scene, Pixie learns to predict
+                            the physics directly in a single forward pass, and generalizes across scenes.
+                        </li>
+                        <li>
+                            It leverages powerful pretrained VISUAL features for generalization.
+                        </li>
+                        <li>
+                            and is trained via supervised learning on a large-scale dataset.
+                        </li>
+                        <li>
+                            Here's a schematic overview!
+                        </li>
+                    </ul>
+                </aside>
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Enter Pixie!</h2>
+                <ul
+                    style="font-size: 1.2rem; text-align: left; margin: 0 auto 1rem auto; width: 90%; line-height: 1.4;">
+                    <li class="fragment"><strong>Pixie</strong>: predict dense material fields in a single forward
+                        pass
                         and generalize across scenes.</li>
+                    <li class="fragment">Using (pretrained) visual features!
+                    </li>
+                    <li class="fragment">Via supervised learning!
+                    </li>
                 </ul>
                 <img class="fragment" src="static/images/teaser_low_res.png"
                     style="width: 80%; border-radius: 8px; margin-top: 30px;" />
@@ -155,9 +515,35 @@
 
             <!-- Slide 4: Method Overview -->
             <section class="white-bg">
+                <aside class="notes">
+                    Ok so how does it work?
+                    <ul>
+                        <li>We start with multi-view images of a scene. Then, we use
+                            a NeRF-like model to reconstruct the 3D shape and appearance, and we distill rich visual
+                            features
+                            from a model like CLIP into this representation.
+
+                        </li>.
+                        <li>
+
+                            Next, a 3D U-Net takes this feature grid and
+                            directly predicts a dense field of physical parameters at every point in space.
+
+                        </li>
+                        <li>
+
+                            Finally, we
+                            can
+                            use
+                            these predicted parameters in any downstream physics engine, like an MPM solver with
+                            Gaussian
+                            Splats, to get real-time, realistic simulations.
+                        </li>
+                    </ul>
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Method Overview</h2>
                 <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
-                    <li class="fragment">Multi-view RGBs encoded by NeRF with distilled CLIP features.</li>
+                    <li class="fragment">Multi-view RGB encoded by NeRF with distilled CLIP features.</li>
                     <li class="fragment">3D U-Net predicts dense material fields.</li>
                     <li class="fragment">Gaussian splats + MPM solver yield real-time simulations.</li>
                 </ul>
@@ -168,12 +554,18 @@
 
             <!-- Slide 3: PixieVerse Dataset -->
             <section class="light-bg" data-background-color="#f5f5f5" data-background-transition="none">
+                <aside class="notes">
+                    To train a model like Pixie, we need a large dataset. So we built PixieVerse, a large-scale
+                    synthetic dataset. It contains over 1600 high-quality 3D assets from 10 different semantic
+                    categories covering 6 different material models, all
+                    annotated with fine-grained ground-truth physical parameters like Young's modulus, Poisson's ratio,
+                    density,
+                    and material classes.
+                    As far as we know, this is the only open-source (and by definition the largest) dataset of paired 3D
+                    assets and physics.
+                    This is the benchmark that powers our supervised learning approach.
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">PixieVerse Dataset</h2>
-                <p style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
-                    <strong>PixieVerse</strong> is a large-scale synthetic benchmark for visual-physics learning.
-                    Semi-automatically annotated
-                    with VLMs.
-                </p>
                 <!-- <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
                     <li class="fragment">Large-scale synthetic benchmark for visual-physics learning.</li>
                     <li class="fragment">1,600+ assets across 10 semantic super-classes.</li>
@@ -209,6 +601,33 @@
 
             <!-- Slide 5: Quantitative Results -->
             <section class="white-bg" data-background-color="#ffffff">
+                <aside class="notes">
+                    So, how well does it work?
+                    <ul>
+                        <li>
+                            Quantitatively, Pixie achieves state-of-the-art results on our benchmark.
+                            We use a large vision model like Gemini Pro to rate the realism of the
+                            resulting animations from competing methods, and found that Pixie outperforms prior methods
+                            around 2 to 4.
+                        </li>
+                        <li>
+                            And
+                            because
+                            it's a single forward pass, it's also about 3 order of magnitude faster than test-time
+                            optimization
+                            methods.
+                        </li>
+                        <li>
+                            Pixie also outperforms other baselines on traditional metrics like PSNR and SSIM, which
+                            measures the rendering quality of the predicted animations
+                            against the groundtruth videos from our dataset.
+                        </li>
+                        <li>
+                            Here's a picture, Pixie runs in around 2 seconds while other methods can take hours (on
+                            A6000 GPU), and still perform much worse.
+                        </li>
+                    </ul>
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Quantitative Results</h2>
                 <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
                     <li class="fragment">2.2–4.6× higher Gemini-Pro realism than baselines.</li>
@@ -218,11 +637,22 @@
                 <img class="fragment" src="static/images/fig_runtime_and_vlm.png"
                     style="width:80%; border-radius:8px; margin-top:30px;" />
             </section>
-
-
-
             <!-- Slide 6: Qualitative Results -->
             <section class="light-bg" data-background-color="#f5f5f5">
+                <aside class="notes">
+                    Let's look at some qualitative results. Here you can see that Pixie is able to accurately recover
+                    not just the material class, but also the continuous physical parameters across the object, like
+                    Young's modulus. Notice the fairly smooth and accurate distribution of values.
+
+                    For example, in the vasedeck, the material models basically segment the vase into the leaves
+                    and the pot. Values like young modulus, poisson ratio, and density are also consistent, with the
+                    leaves being more elastic and less
+                    stiff than the pot.
+
+                    Across different objects, you can also see accurate prediction. For example, the density of the
+                    metal can
+                    is much higher than the other objects.
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Qualitative Results</h2>
                 <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
                     <li class="fragment">Pixie simultaneously recovers
@@ -240,6 +670,14 @@
 
             <!-- Slide 6: Qualitative Results -->
             <section class="light-bg" data-background-color="#f5f5f5">
+                <aside class="notes">
+                    When we compare the final simulations, the difference is clear. Pixie produces stable, plausible
+                    motion, and correct material attribution. In contrast, baseline methods often suffer from common
+                    failure modes, like making objects
+                    too stiff, causing them to be static, or producing noisy predictions or unrealistic combinations of
+                    materials, causing
+                    them to collapse under external force.
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Qualitative Results</h2>
                 <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
                     <li class="fragment">Pixie produces stable, physically plausible motion and correct material
@@ -255,6 +693,17 @@
 
             <!-- Slide 7: Real-world Transfer -->
             <section class="light-bg" data-background-color="#f5f5f5">
+                <aside class="notes">
+                    <!-- And because Pixie is trained on a diverse dataset, it can generalize to real-world scenes in a
+                    zero-shot manner. Here, we've taken a NeRF reconstructed from a real video, and applied Pixie
+                    directly without any retraining or fine-tuning. It still produces compelling and plausible physical
+                    animations. -->
+                    And to me, the most surprising result is Pixie's ability to zero-shot generalize to real-world
+                    scenes!
+                    Remember that Pixie is only ever trained on synthetic data. And yet it can produce plausible
+                    predictions
+                    for real-world captures as shown here.
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Zero-shot Transfer to Real
                     Scenes</h2>
                 <!-- <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
@@ -265,8 +714,56 @@
                 </video>
             </section>
 
+            <!-- Ablation Study -->
+            <section class="light-bg" data-background-color="#f5f5f5">
+                <aside class="notes">
+                    So why does Pixie generalize so well to real scenes, even though it was only trained on synthetic
+                    data?
+                    <ul>
+                        <li>
+                            The key is the use of pretrained rich visual features from CLIP.
+                            This helps bridge the sim-to-real gap.
+                        </li>
+                        <li>
+                            When we ablate this and use simpler features like raw RGB or just occupancy, the
+                            performance drops
+                            significantly. The model struggles to correctly identify materials and predict their
+                            properties,
+                            confirming that pretrained features are crucial for this task.
+                        </li>
+                    </ul>
+                </aside>
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Ablation: Why does Pixie
+                    generalize?</h2>
+                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Pretrained CLIP features are key for sim2real transfer.</li>
+                    <li class="fragment">Ablating CLIP and using RGB or occupancy features significantly degrades
+                        performance:</li>
+                </ul>
+                <img class="fragment" src="static/images/real_ablation_grid_low_res.png"
+                    style="width:50%; border-radius:8px; margin-top:30px;" />
+            </section>
+
+
             <!-- Slide 8: Conclusion & Citation -->
             <section class="black-bg" data-background-color="#ffffff">
+                <aside class="notes">
+                    <ul>
+                        <li>
+                            To conclude, Pixie is a fast, accurate, and generalizable method that bridges the gap
+                            between 3D
+                            vision and physics simulation. By learning to predict dense physical fields from visual
+                            features, it
+                            enables real-time physical interaction with 3D scenes.
+                        </li>
+                        <li>
+                            Please check out our project website for more
+                            videos and information. Thank you.
+                        </li>
+
+                    </ul>
+
+                </aside>
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Conclusion</h2>
                 <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
                     <li class="fragment">Pixie bridges 3D vision and physics with real-time, accurate and generalizable
@@ -309,16 +806,19 @@
 
     <!-- Reveal.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
     <script>
         Reveal.initialize({
             hash: true,      // Allow slide navigation via URL hash
             slideNumber: true,
             controls: true,
-            progress: true
+            progress: true,
+            plugins: [RevealNotes]
         });
 
         /* Count-up animation when the dataset slide becomes active */
         function animateCounts(slide) {
+            if (!slide) return;
             slide.querySelectorAll('.count-up').forEach(el => {
                 if (el.dataset.done) return;
                 const target = +el.dataset.target;
@@ -343,6 +843,8 @@
             if (previousSlide) {
                 const prevVideos = previousSlide.querySelectorAll('video');
                 prevVideos.forEach(video => {
+                    // SVD video is handled by its own cycle function
+                    if (video.id === 'svd-video') return;
                     video.pause();
                     video.currentTime = 0;
                 });
@@ -352,6 +854,8 @@
             if (currentSlide) {
                 const currentVideos = currentSlide.querySelectorAll('video');
                 currentVideos.forEach(video => {
+                    // SVD video is handled by its own cycle function
+                    if (video.id === 'svd-video') return;
                     // Reset and restart the video
                     video.currentTime = 0;
                     video.play().catch(e => {
@@ -362,16 +866,130 @@
             }
         }
 
+        /* ---------------- SVD optimisation demo ---------------- */
+        const svdPaths = [
+            "static/videos/svd_outputs/video00.mp4",
+            "static/videos/svd_outputs/video02.mp4",
+            "static/videos/svd_outputs/video04.mp4",
+            "static/videos/svd_outputs/video06.mp4",
+            "static/videos/svd_outputs/video08.mp4",
+            "static/videos/svd_outputs/video10.mp4",
+            "static/videos/svd_outputs/video12.mp4",
+            "static/videos/svd_outputs/video14.mp4",
+            "static/videos/svd_outputs/video16.mp4",
+            "static/videos/svd_outputs/video18.mp4",
+            "static/videos/svd_outputs/video20.mp4",
+        ];
+
+        let svdCycleId = null;
+        let svdVideoIdx = 0;
+        let svdHighlightIdx = 0;
+        let currentTimeout = 2000; // Start with a 2s delay
+        const minTimeout = 500;    // Ramp down to 0.5s
+        const rampFactor = 0.85;   // Speed up by 15% each step
+
+        const forwardArrows = ['arrow-0', 'arrow-1', 'arrow-2'];
+        const backwardArrows = ['b-arrow-0', 'b-arrow-1', 'b-arrow-2'];
+
+        function clearAllHighlights() {
+            document.querySelectorAll('.arrow-path, .backprop-arrow-path').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.arrow-label, .backprop-arrow-label').forEach(l => l.classList.remove('active'));
+        }
+
+        function highlightArrow(arrowId) {
+            const group = document.getElementById(arrowId);
+            if (group) {
+                group.querySelector('.arrow-path, .backprop-arrow-path')?.classList.add('active');
+                group.querySelector('.arrow-label, .backprop-arrow-label')?.classList.add('active');
+            }
+        }
+
+        function startSvdCycle(slide) {
+            const vid = slide.querySelector('#svd-video');
+            const label = slide.querySelector('#svd-t-label');
+            if (!vid || !label) return;
+
+            svdVideoIdx = 0;
+            svdHighlightIdx = 0;
+
+            vid.loop = true;
+            vid.src = '';
+            label.textContent = 't=--';
+
+            const tick = () => {
+                clearAllHighlights();
+                const totalSteps = forwardArrows.length + backwardArrows.length;
+                const isForwardPass = svdHighlightIdx < forwardArrows.length;
+
+                if (isForwardPass) {
+                    highlightArrow(forwardArrows[svdHighlightIdx]);
+                    if (forwardArrows[svdHighlightIdx] === 'arrow-1') {
+                        const newPath = svdPaths[svdVideoIdx];
+                        vid.src = newPath;
+                        vid.play().catch(() => { });
+                        const newMatch = newPath.match(/video(\d+)\.mp4$/);
+                        label.textContent = `t=${newMatch ? newMatch[1] : svdVideoIdx}`;
+                        svdVideoIdx = (svdVideoIdx + 1) % svdPaths.length;
+                    }
+                } else {
+                    const backIdx = svdHighlightIdx - forwardArrows.length;
+                    highlightArrow(backwardArrows[backIdx]);
+                }
+
+                svdHighlightIdx = (svdHighlightIdx + 1) % totalSteps;
+
+                // Schedule the next tick with the updated timeout
+                currentTimeout = Math.max(minTimeout, currentTimeout * rampFactor);
+                svdCycleId = setTimeout(tick, currentTimeout);
+            };
+
+            svdCycleId = setTimeout(tick, currentTimeout);
+        }
+
+        function stopSvdCycle() {
+            if (svdCycleId) clearTimeout(svdCycleId);
+            svdCycleId = null;
+            const vid = document.getElementById('svd-video');
+            if (vid) {
+                vid.pause();
+                vid.src = '';
+            }
+        }
+
         Reveal.on('slidechanged', event => {
-            animateCounts(event.currentSlide);
-            manageVideos(event.currentSlide, event.previousSlide);
+            if (event.previousSlide) {
+                event.previousSlide.querySelectorAll('video:not(#svd-video)').forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+            }
+            if (event.currentSlide) {
+                event.currentSlide.querySelectorAll('video:not(#svd-video)').forEach(v => {
+                    v.play().catch(() => { });
+                });
+            }
+
+            if (event.currentSlide && event.currentSlide.dataset.slide === 'related-work') {
+                startSvdCycle(event.currentSlide);
+            } else {
+                stopSvdCycle();
+            }
+
+            if (event.currentSlide) {
+                animateCounts(event.currentSlide);
+            }
         });
 
-        // Trigger counts if starting on dataset slide via hash
+        // Initial load handlers
+        const currentSlide = Reveal.getCurrentSlide();
+        if (currentSlide && currentSlide.dataset.slide === 'related-work') {
+            startSvdCycle(currentSlide);
+        }
+        if (currentSlide) {
+            currentSlide.querySelectorAll('video:not(#svd-video)').forEach(v => v.play().catch(() => { }));
+        }
         animateCounts(Reveal.getCurrentSlide());
 
-        // Also manage videos on initial load
-        manageVideos(Reveal.getCurrentSlide(), null);
     </script>
 </body>
 
