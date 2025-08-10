@@ -540,26 +540,25 @@
         the metal can as rigid, while recovering realistic stiffness and density gradients within each object.
         <!-- </p> -->
         <video style="width:100%;" autoplay muted loop playsinline>
-          <source src="static/videos/combined_panel.mp4" type="video/mp4" />
+          <source src="static/videos/combined_panel_1.mp4" type="video/mp4" />
         </video>
-        <!-- <p class="content is-size-5 has-text-justified"> -->
-        <!-- </p> -->
         <div class="tip-banner">
           <span class="icon"><i class="fas fa-lightbulb"></i></span>
           <span><strong>Tip:</strong>&nbsp;See the zoom-in lens for some incorrect
             predictions.
         </div>
+        <video style="width:100%;" autoplay muted loop playsinline>
+          <source src="static/videos/combined_panel_2.mp4" type="video/mp4" />
+        </video>
+        <!-- <p class="content is-size-5 has-text-justified"> -->
+        <!-- </p> -->
         <strong>Pixie against baselines visually:</strong> We visualized the predicted material class and E
         (left, right respectively) for Pixie and Nerf2Physics, E for DreamPhysics (right), and the
         plasticity and hyperelastic function classes predicted by OmniPhysGS.
-        Best Gemini score per
-        scene is highlighted 🟢<span class="good-score">Green</span> while low scores are marked 🔴<span
-          class="bad-score">Red</span>.</span>
         Pixie produces
         stable, physically plausible motion while DreamPhysics remains overly stiff due to inaccurate finegrained E
-        prediction or too high E, OmniPhysGS collapses under load due to
-        unrealistic combination of plasticity and hyperelastic functions, and NeRF2Physics exhibits noisy
-        artifacts.
+        prediction or too high E, OmniPhysGS collapses under load due to unrealistic combination of plasticity and hyperelastic functions, and NeRF2Physics exhibits noisy
+        artifacts in material predictions.
       </div>
 
   </section>

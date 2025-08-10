@@ -135,7 +135,7 @@
         <div class="slides">
             <!-- First slide: embedded video -->
             <section class="dark-bg">
-                <video src="pixie_gradient.mp4" playsinline autoplay muted loop></video>
+                <video src="pixie_gradient.mp4" playsinline autoplay loop controls></video>
             </section>
 
             <!-- Slide 2: Motivation / Introduction -->
@@ -147,14 +147,33 @@
                         &amp; appearance but <em>lack physics</em>.</li>
                     <li class="fragment">Existing test-time optimisation methods are slow and scene-specific.</li>
                     <li class="fragment"><strong>Pixie</strong> predicts dense material fields in a single forward pass
-                        → real-time simulation.</li>
+                        and generalize across scenes.</li>
                 </ul>
-                <img src="static/images/teaser_low_res.png" style="width: 80%; border-radius: 8px; margin-top: 30px;" />
+                <img class="fragment" src="static/images/teaser_low_res.png"
+                    style="width: 80%; border-radius: 8px; margin-top: 30px;" />
             </section>
+
+            <!-- Slide 4: Method Overview -->
+            <section class="white-bg">
+                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Method Overview</h2>
+                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <li class="fragment">Multi-view RGBs encoded by NeRF with distilled CLIP features.</li>
+                    <li class="fragment">3D U-Net predicts dense material fields.</li>
+                    <li class="fragment">Gaussian splats + MPM solver yield real-time simulations.</li>
+                </ul>
+                <img src="static/images/method_overview_low_res.png"
+                    style="width:80%; border-radius:8px; margin-top:30px;" />
+            </section>
+
 
             <!-- Slide 3: PixieVerse Dataset -->
             <section class="light-bg" data-background-color="#f5f5f5" data-background-transition="none">
                 <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">PixieVerse Dataset</h2>
+                <p style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+                    <strong>PixieVerse</strong> is a large-scale synthetic benchmark for visual-physics learning.
+                    Semi-automatically annotated
+                    with VLMs.
+                </p>
                 <!-- <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
                     <li class="fragment">Large-scale synthetic benchmark for visual-physics learning.</li>
                     <li class="fragment">1,600+ assets across 10 semantic super-classes.</li>
@@ -186,18 +205,6 @@
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Slide 4: Method Overview -->
-            <section class="white-bg">
-                <h2 class="gradient-text" style="margin-bottom: 20px; font-size: 2.5rem;">Method Overview</h2>
-                <ul style="font-size: 1.2rem; text-align: left; max-width: 900px; margin: 0 auto; line-height: 1.4;">
-                    <li class="fragment">Multi-view RGB encoded by NeRF with distilled CLIP features.</li>
-                    <li class="fragment">3D U-Net predicts dense material fields.</li>
-                    <li class="fragment">Gaussian splats + MPM solver yield real-time simulations.</li>
-                </ul>
-                <img class="fragment" src="static/images/method_overview_low_res.png"
-                    style="width:80%; border-radius:8px; margin-top:30px;" />
             </section>
 
             <!-- Slide 5: Quantitative Results -->
