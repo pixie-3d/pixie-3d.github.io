@@ -14,13 +14,19 @@ const videoNames = [
     "bouquet",
     "bonsai",
     "vasedeck",
+    "burger_combine",
+    "bun",
+    "dog"
 ];
 
 /* Map from scene → video path (concatenated RGB|material|E|density|nu) */
 const videoPathMap = {
     vasedeck: "static/videos/ours_real_world/renders/vasedeck/concat.mp4",
     bonsai: "static/videos/ours_real_world/renders/bonsai/concat.mp4",
-    bouquet: "static/videos/ours_real_world/renders/bouquet/concat.mp4"
+    bouquet: "static/videos/ours_real_world/renders/bouquet/concat.mp4",
+    burger_combine: "static/videos/ours_real_world/renders/burger_combine/concat.mp4",
+    bun: "static/videos/ours_real_world/renders/bun/concat.mp4",
+    dog: "static/videos/ours_real_world/renders/dog/concat.mp4"
 };
 
 let videos = [];
@@ -258,10 +264,10 @@ $(function () {
 
 /* Carousel arrow helpers */
 function results_slide_left() {
-    document.getElementById("results-objs-scroll").scrollLeft = 0;
+    document.getElementById("results-objs-scroll").scrollLeft -= 220;
 }
 function results_slide_right() {
-    document.getElementById("results-objs-scroll").scrollLeft += 1000;
+    document.getElementById("results-objs-scroll").scrollLeft += 220;
 }
 
 /* Basic video controls */
