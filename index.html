@@ -2,527 +2,540 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Pixie – Fast &amp; 3D Physics from Pixels" />
-  <meta name="keywords" content="Pixie, 3D Physics, CLIP, Gaussian Splatting, MPM, Computer Graphics, NeRF" />
-  <title>Pixie: 3D Physics from Pixels</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pixie – Fast &amp; 3D Physics from Pixels" />
+    <meta name="keywords" content="Pixie, 3D Physics, CLIP, Gaussian Splatting, MPM, Computer Graphics, NeRF" />
+    <title>Pixie: 3D Physics from Pixels</title>
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://pixie-3d.github.io/" />
-  <meta property="og:title" content="Pixie: 3D Physics from Pixels" />
-  <meta property="og:description"
-    content="Pixie trains a neural network that maps pretrained visual features (i.e., CLIP) to dense material fields of physical properties in a single forward pass, enabling real‑time physics simulations." />
-  <meta property="og:image" content="https://pixie-3d.github.io/static/images/preview.png" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pixie-3d.github.io/" />
+    <meta property="og:title" content="Pixie: 3D Physics from Pixels" />
+    <meta property="og:description"
+        content="Pixie trains a neural network that maps pretrained visual features (i.e., CLIP) to dense material fields of physical properties in a single forward pass, enabling real‑time physics simulations." />
+    <meta property="og:image" content="https://pixie-3d.github.io/static/images/preview.png" />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://pixie-3d.github.io/" />
-  <meta property="twitter:title" content="Pixie: 3D Physics from Pixels" />
-  <meta property="twitter:description"
-    content="Pixie trains a neural network that maps pretrained visual features (i.e., CLIP) to dense material fields of physical properties in a single forward pass, enabling real‑time physics simulations." />
-  <meta property="twitter:image" content="https://pixie-3d.github.io/static/images/preview.png" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://pixie-3d.github.io/" />
+    <meta property="twitter:title" content="Pixie: 3D Physics from Pixels" />
+    <meta property="twitter:description"
+        content="Pixie trains a neural network that maps pretrained visual features (i.e., CLIP) to dense material fields of physical properties in a single forward pass, enabling real‑time physics simulations." />
+    <meta property="twitter:image" content="https://pixie-3d.github.io/static/images/preview.png" />
 
-  <!-- FONTS & ICONS -->
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
-  <link rel="stylesheet" href="./static/css/bulma.min.css" />
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
-  <link rel="stylesheet" href="./static/css/index.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css" />
-  <link rel="stylesheet" href="./static/css/real_slider.css" />
-  <!-- Font Awesome (self-hosted kit 403s locally; switch to public CDN) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- FONTS & ICONS -->
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+    <link rel="stylesheet" href="./static/css/index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css" />
+    <link rel="stylesheet" href="./static/css/real_slider.css" />
+    <!-- Font Awesome (self-hosted kit 403s locally; switch to public CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Animated gradient for title -->
-  <style>
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%
-      }
+    <!-- Animated gradient for title -->
+    <style>
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%
+            }
 
-      100% {
-        background-position: 100% 50%
-      }
-    }
+            100% {
+                background-position: 100% 50%
+            }
+        }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #ff6ec4, #7873f5, #ff6ec4);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-      padding-bottom: 0.1em;
-      animation: gradientShift 6s linear infinite;
-    }
-  </style>
+        .gradient-text {
+            background: linear-gradient(90deg, #ff6ec4, #7873f5, #ff6ec4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-bottom: 0.1em;
+            animation: gradientShift 6s linear infinite;
+        }
+    </style>
 
-  <!-- Side navigation styles -->
-  <style>
-    .section-nav {
-      position: fixed;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      z-index: 1000;
-    }
+    <!-- Side navigation styles -->
+    <style>
+        .section-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            z-index: 1000;
+        }
 
-    .section-nav .dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #bbb;
-      display: block;
-      transition: background 0.3s, transform 0.3s;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
-    }
+        .section-nav .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #bbb;
+            display: block;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+        }
 
-    .section-nav .dot:hover {
-      transform: scale(1.2);
-    }
+        .section-nav .dot:hover {
+            transform: scale(1.2);
+        }
 
-    .section-nav .dot.active {
-      background: #ff6ec4;
-    }
+        .section-nav .dot.active {
+            background: #ff6ec4;
+        }
 
-    /* Hide on small screens */
-    @media (max-width: 1023px) {
-      .section-nav {
-        display: none;
-      }
-    }
-  </style>
+        /* Hide on small screens */
+        @media (max-width: 1023px) {
+            .section-nav {
+                display: none;
+            }
+        }
+    </style>
 
-  <!-- Tip banner styles -->
-  <style>
-    .tip-banner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      background: linear-gradient(90deg, #fff3cd, #ffe8a1);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
+    <!-- Tip banner styles -->
+    <style>
+        .tip-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(90deg, #fff3cd, #ffe8a1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .tip-banner .icon i {
-      animation: tipPulse 2s infinite;
-      color: #ffb300;
-    }
+        .tip-banner .icon i {
+            animation: tipPulse 2s infinite;
+            color: #ffb300;
+        }
 
-    @keyframes tipPulse {
+        @keyframes tipPulse {
 
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 0.9;
-      }
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
 
-      50% {
-        transform: scale(1.25);
-        opacity: 1;
-      }
-    }
+            50% {
+                transform: scale(1.25);
+                opacity: 1;
+            }
+        }
 
-    /* ─── Added banner & score styles ─── */
-    .info-banner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      background: linear-gradient(90deg, #d0e8ff, #b5d0ff);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
+        /* ─── Added banner & score styles ─── */
+        .info-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(90deg, #d0e8ff, #b5d0ff);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .info-banner .icon i {
-      animation: infoPulse 2s infinite;
-      color: #3d8bfd;
-    }
+        .info-banner .icon i {
+            animation: infoPulse 2s infinite;
+            color: #3d8bfd;
+        }
 
-    @keyframes infoPulse {
+        @keyframes infoPulse {
 
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 0.9;
-      }
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
 
-      50% {
-        transform: scale(1.25);
-        opacity: 1;
-      }
-    }
+            50% {
+                transform: scale(1.25);
+                opacity: 1;
+            }
+        }
 
-    .good-score {
-      color: #27ae60;
-      font-weight: 600;
-    }
+        .good-score {
+            color: #27ae60;
+            font-weight: 600;
+        }
 
-    .bad-score {
-      color: #c0392b;
-      font-weight: 600;
-    }
+        .bad-score {
+            color: #c0392b;
+            font-weight: 600;
+        }
 
-    /* Success & warning banners for variation */
-    .success-banner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      background: linear-gradient(90deg, #d4edda, #bff7d8);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
+        /* Success & warning banners for variation */
+        .success-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(90deg, #d4edda, #bff7d8);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .success-banner .icon i {
-      animation: infoPulse 2s infinite;
-      color: #28a745;
-    }
+        .success-banner .icon i {
+            animation: infoPulse 2s infinite;
+            color: #28a745;
+        }
 
-    .warning-banner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      background: linear-gradient(90deg, #fff3cd, #ffe8a1);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
+        .warning-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(90deg, #fff3cd, #ffe8a1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .warning-banner .icon i {
-      animation: infoPulse 2s infinite;
-      color: #ffb300;
-    }
+        .warning-banner .icon i {
+            animation: infoPulse 2s infinite;
+            color: #ffb300;
+        }
 
-    /* Gradient keyword effect */
-    .glow-keyword {
-      /* background: linear-gradient(90deg, #16de91, #3d91ff); */
-      background: linear-gradient(90deg, #ff6ec4, #7873f5, #ff6ec4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
+        /* Gradient keyword effect */
+        .glow-keyword {
+            /* background: linear-gradient(90deg, #16de91, #3d91ff); */
+            background: linear-gradient(90deg, #ff6ec4, #7873f5, #ff6ec4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
 
-    /* Lead emoji alignment helper */
-    .lead-emoji {
-      font-size: 1.15em;
-      margin-right: 0.25em;
-    }
+        /* Lead emoji alignment helper */
+        .lead-emoji {
+            font-size: 1.15em;
+            margin-right: 0.25em;
+        }
 
-    /* Dark-mode variables */
-    html.dark {
-      filter: invert(1) hue-rotate(180deg);
-    }
+        /* Dark-mode variables */
+        html.dark {
+            filter: invert(1) hue-rotate(180deg);
+        }
 
-    /* Scroll progress bar */
-    #scrollbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #ff6ec4, #7873f5);
-      z-index: 9999;
-    }
-  </style>
+        /* Scroll progress bar */
+        #scrollbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6ec4, #7873f5);
+            z-index: 9999;
+        }
+    </style>
 
-  <style>
-    .author-block figure img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* ensure fill and crop */
-      object-position: center;
-      /* keep face centred */
-    }
-  </style>
+    <style>
+        .author-block figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* ensure fill and crop */
+            object-position: center;
+            /* keep face centred */
+        }
+    </style>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-  <script src="./static/js/real_slider.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <script src="./static/js/real_slider.js"></script>
 </head>
 
 <body>
-  <!-- SIDE NAVIGATION DOTS -->
-  <div class="section-nav">
-    <a href="#cover" class="dot active" title="Cover"></a>
-    <a href="#intro" class="dot" title="Introduction"></a>
-    <a href="#dataset" class="dot" title="Dataset"></a>
-    <a href="#method" class="dot" title="Method"></a>
-    <a href="#results" class="dot" title="Results"></a>
-    <!-- <a href="#real" class="dot" title="Real-world"></a>
+    <!-- SIDE NAVIGATION DOTS -->
+    <div class="section-nav">
+        <a href="#cover" class="dot active" title="Cover"></a>
+        <a href="#intro" class="dot" title="Introduction"></a>
+        <a href="#dataset" class="dot" title="Dataset"></a>
+        <a href="#method" class="dot" title="Method"></a>
+        <a href="#results" class="dot" title="Results"></a>
+        <!-- <a href="#real" class="dot" title="Real-world"></a>
     <a href="#ablation" class="dot" title="Ablation"></a>
     <a href="#authors" class="dot" title="Authors"></a> -->
-    <a href="#citation" class="dot" title="Citation"></a>
-  </div>
-
-  <!-- ──────────  HERO / TEASER  (UMI-on-legs template style)  ────────── -->
-  <section class="hero is-link is-fullheight video" id="cover" style="overflow:hidden; position:relative;">
-    <!-- desktop video -->
-    <div class="hero-video" style="height:100%; width:177.7778vh; min-width:100%; min-height:56.25vw;">
-      <video playsinline autoplay muted loop>
-        <source src="static/videos/teaser_full_high_quality.mp4" type="video/mp4" />
-      </video>
+        <a href="#citation" class="dot" title="Citation"></a>
     </div>
-    <!-- mobile video -->
-    <div class="hero-video is-hidden-tablet is-inline-block-mobile"
-      style="height:154.2857vw; width:100%; min-width:64.8vh; min-height:100%;">
-      <video playsinline autoplay muted loop>
-        <source src="static/videos/teaser_full_low_quality.mp4" type="video/mp4" />
-      </video>
-    </div>
-    <div class="overlay"></div>
 
-    <!-- NAVBAR (paper | arXiv | code) -->
-    <div class="hero-head is-hidden-mobile">
-      <header class="navbar">
-        <div class="container is-size-5">
-          <div class="navbar-menu">
-            <div class="navbar-end">
-              <a class="navbar-item pl-4 pr-4" href="static/pixie_3d.pdf">
-                <span class="icon" style="margin-right:5px;">
-                  <img src="static/images/pdf.svg" alt="PDF" />
-                </span>
-                <span>Paper</span>
-              </a>
-              <a class="navbar-item pl-4 pr-4" href="https://www.arxiv.org/abs/2508.17437">
-                <span class="icon" style="margin-right:5px;">
-                  <img src="static/images/arxiv.svg" alt="arXiv" />
-                </span>
-                <span>arXiv</span>
-              </a>
-              <a class="navbar-item pl-4 pr-4" href="https://arxiv.org/abs/XXXXX">
-                <span class="icon" style="margin-right:5px;">
-                  <img src="static/images/X_icon.svg" alt="X" />
-                </span>
-                <span>Tweet</span>
-              </a>
-              <a class="navbar-item pl-4 pr-4" href="slide.html">
-                <span class="icon" style="margin-right:5px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
-                    style="width: 1em; height: 1em; fill: white;">
-                    <path
-                      d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384l0-128 16 0 0 128c0 17.7 14.3 32 32 32s32-14.3 32-32l0-288 56 0 64 0 16 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-16 0 0-64 192 0 0 192-192 0 0-32-64 0 0 48c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48L368 0c-26.5 0-48 21.5-48 48l0 80-76.9 0-65.9 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 480c0 17.7 14.3 32 32 32s32-14.3 32-32z" />
-                  </svg>
-                </span>
-                <span>Slides</span>
-              </a>
-              <span class="navbar-item pl-4 pr-4">
-                <a class="button is-inverted is-large" href="https://github.com/vlongle/pixie">
-                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
-                </a>
-              </span>
-            </div>
-          </div>
+    <!-- ──────────  HERO / TEASER  (UMI-on-legs template style)  ────────── -->
+    <section class="hero is-link is-fullheight video" id="cover" style="overflow:hidden; position:relative;">
+        <!-- desktop video -->
+        <div class="hero-video" style="height:100%; width:177.7778vh; min-width:100%; min-height:56.25vw;">
+            <video playsinline autoplay muted loop>
+                <source src="static/videos/teaser_full_high_quality.mp4" type="video/mp4" />
+            </video>
         </div>
-      </header>
-    </div>
+        <!-- mobile video -->
+        <div class="hero-video is-hidden-tablet is-inline-block-mobile"
+            style="height:154.2857vw; width:100%; min-width:64.8vh; min-height:100%;">
+            <video playsinline autoplay muted loop>
+                <source src="static/videos/teaser_full_low_quality.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="overlay"></div>
 
-    <!-- HERO TITLE -->
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title is-1 publication-title is-size-1-mobile"
-          style="font-size:7vw; line-height:1.1; width:100%; max-width:100%;">
-          <!-- <i id="changing-icon" class="ti ti-leaf"
+        <!-- NAVBAR (paper | arXiv | code) -->
+        <div class="hero-head is-hidden-mobile">
+            <header class="navbar">
+                <div class="container is-size-5">
+                    <div class="navbar-menu">
+                        <div class="navbar-end">
+                            <a class="navbar-item pl-4 pr-4" href="static/pixie_3d.pdf">
+                                <span class="icon" style="margin-right:5px;">
+                                    <img src="static/images/pdf.svg" alt="PDF" />
+                                </span>
+                                <span>Paper</span>
+                            </a>
+                            <a class="navbar-item pl-4 pr-4" href="https://www.arxiv.org/abs/2508.17437">
+                                <span class="icon" style="margin-right:5px;">
+                                    <img src="static/images/arxiv.svg" alt="arXiv" />
+                                </span>
+                                <span>arXiv</span>
+                            </a>
+                            <a class="navbar-item pl-4 pr-4" href="https://arxiv.org/abs/XXXXX">
+                                <span class="icon" style="margin-right:5px;">
+                                    <img src="static/images/X_icon.svg" alt="X" />
+                                </span>
+                                <span>Tweet</span>
+                            </a>
+                            <a class="navbar-item pl-4 pr-4" href="slide.html">
+                                <span class="icon" style="margin-right:5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
+                                        style="width: 1em; height: 1em; fill: white;">
+                                        <path
+                                            d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384l0-128 16 0 0 128c0 17.7 14.3 32 32 32s32-14.3 32-32l0-288 56 0 64 0 16 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-16 0 0-64 192 0 0 192-192 0 0-32-64 0 0 48c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48L368 0c-26.5 0-48 21.5-48 48l0 80-76.9 0-65.9 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 480c0 17.7 14.3 32 32 32s32-14.3 32-32z" />
+                                    </svg>
+                                </span>
+                                <span>Slides</span>
+                            </a>
+                            <span class="navbar-item pl-4 pr-4">
+                                <a class="button is-inverted is-large" href="https://github.com/vlongle/pixie">
+                                    <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <!-- HERO TITLE -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-1 publication-title is-size-1-mobile"
+                    style="font-size:7vw; line-height:1.1; width:100%; max-width:100%;">
+                    <!-- <i id="changing-icon" class="ti ti-leaf"
             style="font-size:1em; vertical-align:middle; margin-right:0.15em;"></i> -->
-          <span class="gradient-text">Pixie</span><br />
-          <span>Physics from Pixels</span>
-        </h1>
-        <!-- mobile quick links -->
-        <div class="column has-text-centered is-hidden-tablet">
-          <div class="publication-links">
-            <span class="link-block"><a href="static/paper.pdf"
-                class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
-                    src="static/images/pdf.svg" alt="PDF" /></span><span>Paper</span></a></span>
-            <span class="link-block"><a href="https://arxiv.org/abs/XXXXX"
-                class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
-                    src="static/images/arxiv.svg" alt="arXiv" /></span><span>arXiv</span></a></span>
-            <span class="link-block"><a href="slide.html"
-                class="external-link button is-normal is-rounded is-dark"><span class="icon"><svg
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
-                    style="width: 1em; height: 1em; fill: white;">
-                    <path
-                      d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384l0-128 16 0 0 128c0 17.7 14.3 32 32 32s32-14.3 32-32l0-288 56 0 64 0 16 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-16 0 0-64 192 0 0 192-192 0 0-32-64 0 0 48c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48L368 0c-26.5 0-48 21.5-48 48l0 80-76.9 0-65.9 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 480c0 17.7 14.3 32 32 32s32-14.3 32-32z" />
-                  </svg></span><span>Slides</span></a></span>
-            <span class="link-block"><a href="https://github.com/vlongle/pixie"
-                class="external-link button is-normal is-rounded is-dark"><span class="icon"><i
-                    class="fab fa-github"></i></span><span>Code</span></a></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HERO FOOTER TABS -->
-    <div class="hero-foot is-hidden-mobile">
-      <nav class="tabs is-boxed is-fullwidth is-size-5">
-        <ul>
-          <li><a href="#intro">Introduction</a></li>
-          <li><a href="#dataset">PixieVerse Dataset</a></li>
-          <li><a href="#method">Method</a></li>
-          <li><a href="#results">Results</a></li>
-          <!-- <li><a href="#real">Real-world</a></li>
-          <li><a href="#ablation">Ablation</a></li> -->
-          <!-- <li><a href="#citation">Citation</a></li> -->
-        </ul>
-      </nav>
-    </div>
-  </section>
-
-  <!-- ──────────  INTRODUCTION  ────────── -->
-  <section id="intro" class="section is-medium">
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">
-        <i id="changing-icon" class="ti ti-leaf" style="font-size:1em; vertical-align:middle; margin-right:0.15em;"></i>
-        Why learn physics fields?
-      </h2>
-      <p class="content is-size-5 has-text-justified">
-        Photorealistic 3D reconstructions (NeRF, Gaussian Splatting) capture geometry &amp; appearance but <em>lack
-          physics</em>. This limits 3D reconstruction to static scenes. Recently, there has been a surge of
-        interest in integrating physics into
-        3D modeling. But existing test‑time optimisation methods are slow and scene‑specific.
-        <strong>Pixie</strong>
-        trains a neural network thatmaps pretrained visual features (i.e., CLIP) to <em>dense material
-          fields</em> of physical properties in a single forward pass, enabling real‑time
-        physics simulations.
-      </p>
-      <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" />
-
-    </div>
-  </section>
-
-
-  <!-- ──────────  DATASET  ────────── -->
-  <section id="dataset" class="section is-medium has-background-light">
-    <div class="container is-fluid">
-      <div class="columns has-text-centered">
-        <div class="column is-12">
-          <h2 class="title is-2">PixieVerse Dataset</h2>
-
-          <div class="content has-text-justified">
-            <p>
-              PixieVerse is a large-scale synthetic benchmark for visual-physics learning. It features thousands of
-              high-quality assets that span diverse semantic classes and material behaviours, each annotated with dense
-              physical properties. The dataset is labeled automatically via a VLM pipeline we developed.
-            </p>
-          </div>
-
-          <div class="tip-banner">
-            <span class="icon"><i class="fas fa-lightbulb"></i></span>
-            <span><strong>Tip:</strong>&nbsp; See our paper for plots of the data
-              distributions.</span>
-          </div>
-
-          <div class="columns is-vcentered is-multiline" style="margin-top:1.5rem;">
-            <div class="column is-9-desktop is-12">
-              <video class="is-rounded" style="width:100%;" autoplay muted loop playsinline>
-                <source src="static/videos/cam360.mp4" type="video/mp4" />
-              </video>
+                    <span class="gradient-text">Pixie</span><br />
+                    <span>Physics from Pixels</span>
+                </h1>
+                <!-- mobile quick links -->
+                <div class="column has-text-centered is-hidden-tablet">
+                    <div class="publication-links">
+                        <span class="link-block"><a href="static/pixie_3d.pdf"
+                                class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
+                                        src="static/images/pdf.svg" alt="PDF" /></span><span>Paper</span></a></span>
+                        <span class="link-block"><a href="https://arxiv.org/abs/XXXXX"
+                                class="external-link button is-normal is-rounded is-dark"><span class="icon"><img
+                                        src="static/images/arxiv.svg" alt="arXiv" /></span><span>arXiv</span></a></span>
+                        <span class="link-block"><a href="slide.html"
+                                class="external-link button is-normal is-rounded is-dark"><span class="icon"><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
+                                        style="width: 1em; height: 1em; fill: white;">
+                                        <path
+                                            d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384l0-128 16 0 0 128c0 17.7 14.3 32 32 32s32-14.3 32-32l0-288 56 0 64 0 16 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-16 0 0-64 192 0 0 192-192 0 0-32-64 0 0 48c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48L368 0c-26.5 0-48 21.5-48 48l0 80-76.9 0-65.9 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 480c0 17.7 14.3 32 32 32s32-14.3 32-32z" />
+                                    </svg></span><span>Slides</span></a></span>
+                        <span class="link-block"><a href="https://github.com/vlongle/pixie"
+                                class="external-link button is-normal is-rounded is-dark"><span class="icon"><i
+                                        class="fab fa-github"></i></span><span>Code</span></a></span>
+                    </div>
+                </div>
             </div>
-            <div class="column is-3-desktop is-12">
-              <div class="columns is-mobile is-multiline is-variable is-2" style="margin-bottom:1rem;">
-                <div class="column is-half has-text-centered">
-                  <p class="heading">Assets</p>
-                  <p class="title"><span class="count-up" data-target="1624">0</span></p>
-                </div>
-                <div class="column is-half has-text-centered">
-                  <p class="heading">Super-classes</p>
-                  <p class="title"><span class="count-up" data-target="10">0</span></p>
-                </div>
-                <div class="column is-half has-text-centered">
-                  <p class="heading">Material Models</p>
-                  <p class="title"><span class="count-up" data-target="5">0</span></p>
-                </div>
-                <div class="column is-half has-text-centered">
-                  <p class="heading">Annotations</p>
-                  <p class="title glow-keyword">E, ν, ρ, ID</p>
-                </div>
-              </div>
-              <!-- <ul class="content is-size-6" style="margin-top:0;">
+        </div>
+
+        <!-- HERO FOOTER TABS -->
+        <div class="hero-foot is-hidden-mobile">
+            <nav class="tabs is-boxed is-fullwidth is-size-5">
+                <ul>
+                    <li><a href="#intro">Introduction</a></li>
+                    <li><a href="#dataset">PixieVerse Dataset</a></li>
+                    <li><a href="#method">Method</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <!-- <li><a href="#real">Real-world</a></li>
+          <li><a href="#ablation">Ablation</a></li> -->
+                    <!-- <li><a href="#citation">Citation</a></li> -->
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- ──────────  INTRODUCTION  ────────── -->
+    <section id="intro" class="section is-medium">
+        <div class="container is-max-desktop">
+            <h2 class="title is-2 has-text-centered">
+                <i id="changing-icon" class="ti ti-leaf"
+                    style="font-size:1em; vertical-align:middle; margin-right:0.15em;"></i>
+                Why learn physics fields?
+            </h2>
+            <p class="content is-size-5 has-text-justified">
+                Photorealistic 3D reconstructions (NeRF, Gaussian Splatting) capture geometry &amp; appearance but
+                <em>lack
+                    physics</em>. This limits 3D reconstruction to static scenes. Recently, there has been a surge of
+                interest in integrating physics into
+                3D modeling. But existing test‑time optimisation methods are slow and scene‑specific.
+                <strong>Pixie</strong>
+                trains a neural network thatmaps pretrained visual features (i.e., CLIP) to <em>dense material
+                    fields</em> of physical properties in a single forward pass, enabling real‑time
+                physics simulations.
+            </p>
+            <figure class="image is-fullwidth"><img src="static/images/teaser.png" alt="Quantitative results" />
+
+        </div>
+    </section>
+
+
+    <!-- ──────────  DATASET  ────────── -->
+    <section id="dataset" class="section is-medium has-background-light">
+        <div class="container is-fluid">
+            <div class="columns has-text-centered">
+                <div class="column is-12">
+                    <h2 class="title is-2">PixieVerse Dataset</h2>
+
+                    <div class="content has-text-justified">
+                        <p>
+                            PixieVerse is a large-scale synthetic benchmark for visual-physics learning. It features
+                            thousands of
+                            high-quality assets that span diverse semantic classes and material behaviours, each
+                            annotated with dense
+                            physical properties. The dataset is labeled automatically via a VLM pipeline we developed.
+                        </p>
+                    </div>
+
+                    <div class="tip-banner">
+                        <span class="icon"><i class="fas fa-lightbulb"></i></span>
+                        <span><strong>Tip:</strong>&nbsp; See our paper for plots of the data
+                            distributions.</span>
+                    </div>
+
+                    <div class="columns is-vcentered is-multiline" style="margin-top:1.5rem;">
+                        <div class="column is-9-desktop is-12">
+                            <video class="is-rounded" style="width:100%;" autoplay muted loop playsinline>
+                                <source src="static/videos/cam360.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="column is-3-desktop is-12">
+                            <div class="columns is-mobile is-multiline is-variable is-2" style="margin-bottom:1rem;">
+                                <div class="column is-half has-text-centered">
+                                    <p class="heading">Assets</p>
+                                    <p class="title"><span class="count-up" data-target="1624">0</span></p>
+                                </div>
+                                <div class="column is-half has-text-centered">
+                                    <p class="heading">Super-classes</p>
+                                    <p class="title"><span class="count-up" data-target="10">0</span></p>
+                                </div>
+                                <div class="column is-half has-text-centered">
+                                    <p class="heading">Material Models</p>
+                                    <p class="title"><span class="count-up" data-target="5">0</span></p>
+                                </div>
+                                <div class="column is-half has-text-centered">
+                                    <p class="heading">Annotations</p>
+                                    <p class="title glow-keyword">E, ν, ρ, ID</p>
+                                </div>
+                            </div>
+                            <!-- <ul class="content is-size-6" style="margin-top:0;">
                 <li>Per-voxel annotations of <span class="glow-keyword">E, ν, ρ</span> & material ID</li>
                 <li>Generated via Gemini-2.5-Pro + physics heuristics</li>
               </ul> -->
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
 
-  <!-- ──────────  METHOD  ────────── -->
-  <section id="method" class="section is-medium">
-    <div class="container is-max-desktop">
+    <!-- ──────────  METHOD  ────────── -->
+    <section id="method" class="section is-medium">
+        <div class="container is-max-desktop">
 
-      <h2 class="title is-2 has-text-centered">
-        Method Overview</h2>
-      <!-- <figure class="image is-fullwidth"><img src="static/images/method_overview.png" alt="Method overview" /></figure> -->
-      <figure class="image is-fullwidth"><img src="static/images/method_overview_low_res.png" alt="Method overview" />
-      </figure>
+            <h2 class="title is-2 has-text-centered">
+                Method Overview</h2>
+            <!-- <figure class="image is-fullwidth"><img src="static/images/method_overview.png" alt="Method overview" /></figure> -->
+            <figure class="image is-fullwidth"><img src="static/images/method_overview_low_res.png"
+                    alt="Method overview" />
+            </figure>
 
-      <p class="content is-size-5 has-text-justified">
-        Multi‑view posed RGB images are encoded by a NeRF with distilled CLIP features yielding a 3D feature grid. A
-        3D U‑Net predicts material fields that are transferred onto Gaussian splats and simulated with an Material Point
-        Method (MPM) Physics solver to produce 3D physics simulations.
-      </p>
-    </div>
-  </section>
-
-  <!-- ──────────  RESULTS  ────────── -->
-  <section id="results" class="section is-medium has-background-light">
-
-    <!-- Added: insight banner highlighting key takeaway -->
-    </div>
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Results</h2>
-      We render a video of each 3D physic animation predicted by our model and other competitors. A state-of-the-art VLM
-      <a href="https://gemini.google.com/app">Gemini-Pro-2.5</a> is used to evaluate the realism and score the
-      candidates.
-      <!-- Quantitative results -->
-      <figure class="image is-fullwidth"><img src="static/images/fig_runtime_and_vlm.png" alt="Quantitative results" />
-
-        <!-- <p class="content is-size-5 has-text-justified"> -->
-        <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics, OmniPhysGS
-        and NeRF2Physics by 1.46-4.39x in
-        Gemini‑Pro realism while running <em>10³×</em> faster.
-        <!-- </p> -->
-      </figure>
-      <br /> <br />
-      <!-- Quantitative results -->
-      <figure class="image is-fullwidth"><img src="static/images/table_main_results.png" alt="Quantitative results" />
-
-        <div class="info-banner">
-          <span class="icon"><i class="fas fa-chart-line"></i></span>
-          <span><strong>Insight:</strong>&nbsp;Pixie achieves <strong>state-of-the-art</strong> realism while running
-            <strong>10³× faster</strong> than existing approaches!
-            ⚡️</span>
+            <p class="content is-size-5 has-text-justified">
+                Multi‑view posed RGB images are encoded by a NeRF with distilled CLIP features yielding a 3D feature
+                grid. A
+                3D U‑Net predicts material fields that are transferred onto Gaussian splats and simulated with an
+                Material Point
+                Method (MPM) Physics solver to produce 3D physics simulations.
+            </p>
         </div>
-        <strong>More quantitative results!</strong> We also report perceptual metrics (PSNR, SSIM) against the
-        reference videos in
-        PixieVerse, the VLM Gemini scores, and five other metrics our
-        method optimizes including discrete material accuracy and continuous errors over E, ν, ρ. Standard
-        errors and 95% CI are also included, and best values are <strong>bolded</strong>. Pixie is by far the best
-        performer.
-        1.46-4.39x improvement in VLM score and 3.6-30.3% gains in PSNR and SSIM against competitors!
-      </figure>
+    </section>
 
-      <!-- 
+    <!-- ──────────  RESULTS  ────────── -->
+    <section id="results" class="section is-medium has-background-light">
+
+        <!-- Added: insight banner highlighting key takeaway -->
+        </div>
+        <div class="container is-max-desktop">
+            <h2 class="title is-2 has-text-centered">Results</h2>
+            We render a video of each 3D physic animation predicted by our model and other competitors. A
+            state-of-the-art VLM
+            <a href="https://gemini.google.com/app">Gemini-Pro-2.5</a> is used to evaluate the realism and score the
+            candidates.
+            <!-- Quantitative results -->
+            <figure class="image is-fullwidth"><img src="static/images/fig_runtime_and_vlm.png"
+                    alt="Quantitative results" />
+
+                <!-- <p class="content is-size-5 has-text-justified"> -->
+                <strong>VLM Score vs Runtime:</strong> On the PixieVerse benchmark, Pixie outperforms DreamPhysics,
+                OmniPhysGS
+                and NeRF2Physics by 1.46-4.39x in
+                Gemini‑Pro realism while running <em>10³×</em> faster.
+                <!-- </p> -->
+            </figure>
+            <br /> <br />
+            <!-- Quantitative results -->
+            <figure class="image is-fullwidth"><img src="static/images/table_main_results.png"
+                    alt="Quantitative results" />
+
+                <div class="info-banner">
+                    <span class="icon"><i class="fas fa-chart-line"></i></span>
+                    <span><strong>Insight:</strong>&nbsp;Pixie achieves <strong>state-of-the-art</strong> realism while
+                        running
+                        <strong>10³× faster</strong> than existing approaches!
+                        ⚡️</span>
+                </div>
+                <strong>More quantitative results!</strong> We also report perceptual metrics (PSNR, SSIM) against the
+                reference videos in
+                PixieVerse, the VLM Gemini scores, and five other metrics our
+                method optimizes including discrete material accuracy and continuous errors over E, ν, ρ. Standard
+                errors and 95% CI are also included, and best values are <strong>bolded</strong>. Pixie is by far the
+                best
+                performer.
+                1.46-4.39x improvement in VLM score and 3.6-30.3% gains in PSNR and SSIM against competitors!
+            </figure>
+
+            <!-- 
 
       <figure class="image is-fullwidth"><img src="static/images/qual_viz_ours_full_tight.png"
           alt="Quantitative results" />
@@ -543,402 +556,425 @@
         </p>
       </figure> -->
 
-      <!-- Qualitative results -->
-      <div class="has-text-centered mt-5">
-        <video style="width:100%;" autoplay muted loop playsinline>
-          <source src="static/videos/qual_viz_ours_full_tight.mp4" type="video/mp4" />
-        </video>
-        <video style="width:100%;" autoplay muted loop playsinline>
-          <source src="static/videos/qual_viz_ours_full_tight_new.mp4" type="video/mp4" />
-        </video>
-        <!-- <p class="content is-size-5 has-text-justified"> -->
-        <strong>What Pixie predicts:</strong> Pixie simultaneously recovers
-        discrete material class , E, ν, ρ with a high degree of accuracy. For example, the model correctly labels
-        labels foliage as elastic and
-        the metal can as rigid, while recovering realistic stiffness and density gradients within each object.
-        <!-- </p> -->
-        <video style="width:100%;" autoplay muted loop playsinline>
-          <source src="static/videos/combined_panel_1.mp4" type="video/mp4" />
-        </video>
-        <div class="tip-banner">
-          <span class="icon"><i class="fas fa-lightbulb"></i></span>
-          <span><strong>Tip:</strong>&nbsp;See the zoom-in lens for some incorrect
-            predictions.
-        </div>
-        <video style="width:100%;" autoplay muted loop playsinline>
-          <source src="static/videos/combined_panel_2.mp4" type="video/mp4" />
-        </video>
-        <!-- <p class="content is-size-5 has-text-justified"> -->
-        <!-- </p> -->
-        <strong>Pixie against baselines visually:</strong> We visualized the predicted material class and E
-        (left, right respectively) for Pixie and Nerf2Physics, E for DreamPhysics (right), and the
-        plasticity and hyperelastic function classes predicted by OmniPhysGS.
-        Pixie produces
-        stable, physically plausible motion while DreamPhysics remains overly stiff due to inaccurate finegrained E
-        prediction or too high E, OmniPhysGS collapses under load due to unrealistic combination of plasticity and hyperelastic functions, and NeRF2Physics exhibits noisy
-        artifacts in material predictions.
-      </div>
+            <!-- Qualitative results -->
+            <div class="has-text-centered mt-5">
+                <video style="width:100%;" autoplay muted loop playsinline>
+                    <source src="static/videos/qual_viz_ours_full_tight.mp4" type="video/mp4" />
+                </video>
+                <video style="width:100%;" autoplay muted loop playsinline>
+                    <source src="static/videos/qual_viz_ours_full_tight_new.mp4" type="video/mp4" />
+                </video>
+                <!-- <p class="content is-size-5 has-text-justified"> -->
+                <strong>What Pixie predicts:</strong> Pixie simultaneously recovers
+                discrete material class , E, ν, ρ with a high degree of accuracy. For example, the model correctly
+                labels
+                labels foliage as elastic and
+                the metal can as rigid, while recovering realistic stiffness and density gradients within each object.
+                <!-- </p> -->
+                <video style="width:100%;" autoplay muted loop playsinline>
+                    <source src="static/videos/combined_panel_1.mp4" type="video/mp4" />
+                </video>
+                <div class="tip-banner">
+                    <span class="icon"><i class="fas fa-lightbulb"></i></span>
+                    <span><strong>Tip:</strong>&nbsp;See the zoom-in lens for some incorrect
+                        predictions.
+                </div>
+                <video style="width:100%;" autoplay muted loop playsinline>
+                    <source src="static/videos/combined_panel_2.mp4" type="video/mp4" />
+                </video>
+                <!-- <p class="content is-size-5 has-text-justified"> -->
+                <!-- </p> -->
+                <strong>Pixie against baselines visually:</strong> We visualized the predicted material class and E
+                (left, right respectively) for Pixie and Nerf2Physics, E for DreamPhysics (right), and the
+                plasticity and hyperelastic function classes predicted by OmniPhysGS.
+                Pixie produces
+                stable, physically plausible motion while DreamPhysics remains overly stiff due to inaccurate
+                finegrained E
+                prediction or too high E, OmniPhysGS collapses under load due to unrealistic combination of plasticity
+                and hyperelastic functions, and NeRF2Physics exhibits noisy
+                artifacts in material predictions.
+            </div>
 
-  </section>
+    </section>
 
 
-  <!-- ──────────  REAL WORLD  ────────── -->
-  <section id="real" class="section is-medium" style="background-color: #000000; color: white;">
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered" style="color: white;">Zero-shot Transfer to Real Scenes</h2>
-      <p class="content is-size-5 has-text-justified" style="color: #e0e0e0;">Interactively explore Pixie's material predictions on captured
-        NeRF scenes. Drag the slider to compare input RGB with predicted physics fields, switch feature views, and
-        pick different scenes via thumbnails.</p>
-      <div id="main-results">
-        <div class="switcher" data-switcher-title="Feature view">
-          <div data-switcher-label="Material"></div>
-          <div data-switcher-label="Young&#39;s&nbsp;E"></div>
-          <div data-switcher-label="Density"></div>
-          <div data-switcher-label="Poisson&nbsp;ν"></div>
+    <!-- ──────────  REAL WORLD  ────────── -->
+    <section id="real" class="section is-medium" style="background-color: #000000; color: white;">
+        <div class="container is-max-desktop">
+            <h2 class="title is-2 has-text-centered" style="color: white;">Zero-shot Transfer to Real Scenes</h2>
+            <p class="content is-size-5 has-text-justified" style="color: #e0e0e0;">Interactively explore Pixie's
+                material predictions on captured
+                NeRF scenes. Drag the slider to compare input RGB with predicted physics fields, switch feature views,
+                and
+                pick different scenes via thumbnails.</p>
+            <div id="main-results">
+                <div class="switcher" data-switcher-title="Feature view">
+                    <div data-switcher-label="Material"></div>
+                    <div data-switcher-label="Young&#39;s&nbsp;E"></div>
+                    <div data-switcher-label="Density"></div>
+                    <div data-switcher-label="Poisson&nbsp;ν"></div>
+                </div>
+                <div id="image-compare-canvas" class="image-compare" data-before-label="RGB"
+                    data-after-label="Material Fields">
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="video-bar base-row">
+                    <button id="play-btn" class="video-btn fa fa-lg fa-pause" onclick="play_pause()"
+                        style="margin-right:0;"></button>
+                    <div style="position:absolute; right:0;">
+                        <button class="video-btn fa fa-arrows-alt fa-lg" onclick="fullscreen()"></button>
+                    </div>
+                </div>
+                <div class="thumbnail-scroller">
+                    <button class="results-slide-arrow" id="results-slide-arrow-prev"
+                        onclick="results_slide_left()">&#8249;</button>
+                    <div class="results-slide-row" id="results-objs-scroll">
+                        <div data-img-src="static/videos/ours_real_world/renders/bouquet/thumbnail.jpg"
+                            data-label="Bouquet"></div>
+                        <div data-img-src="static/videos/ours_real_world/renders/bonsai/thumbnail.jpg"
+                            data-label="Bonsai"></div>
+                        <div data-img-src="static/videos/ours_real_world/renders/vasedeck/thumbnail.jpg"
+                            data-label="Vasedeck"></div>
+                        <div data-img-src="static/videos/ours_real_world/renders/burger_combine/thumbnail.jpg"
+                            data-label="Burger"></div>
+                        <div data-img-src="static/videos/ours_real_world/renders/bun/thumbnail.jpg" data-label="Bun">
+                        </div>
+                        <div data-img-src="static/videos/ours_real_world/renders/dog/thumbnail.jpg" data-label="Dog">
+                        </div>
+                    </div>
+                    <button class="results-slide-arrow" id="results-slide-arrow-next"
+                        onclick="results_slide_right()">&#8250;</button>
+                </div>
+            </div>
         </div>
-        <div id="image-compare-canvas" class="image-compare" data-before-label="RGB" data-after-label="Material Fields">
-          <canvas id="canvas"></canvas>
-        </div>
-        <div class="video-bar base-row">
-          <button id="play-btn" class="video-btn fa fa-lg fa-pause" onclick="play_pause()"
-            style="margin-right:0;"></button>
-          <div style="position:absolute; right:0;">
-            <button class="video-btn fa fa-arrows-alt fa-lg" onclick="fullscreen()"></button>
-          </div>
-        </div>
-        <div class="thumbnail-scroller">
-          <button class="results-slide-arrow" id="results-slide-arrow-prev"
-            onclick="results_slide_left()">&#8249;</button>
-          <div class="results-slide-row" id="results-objs-scroll">
-            <div data-img-src="static/videos/ours_real_world/renders/bouquet/thumbnail.jpg" data-label="Bouquet"></div>
-            <div data-img-src="static/videos/ours_real_world/renders/bonsai/thumbnail.jpg" data-label="Bonsai"></div>
-            <div data-img-src="static/videos/ours_real_world/renders/vasedeck/thumbnail.jpg" data-label="Vasedeck"></div>
-            <div data-img-src="static/videos/ours_real_world/renders/burger_combine/thumbnail.jpg" data-label="Burger"></div>
-            <div data-img-src="static/videos/ours_real_world/renders/bun/thumbnail.jpg" data-label="Bun"></div>
-            <div data-img-src="static/videos/ours_real_world/renders/dog/thumbnail.jpg" data-label="Dog"></div>
-          </div>
-          <button class="results-slide-arrow" id="results-slide-arrow-next"
-            onclick="results_slide_right()">&#8250;</button>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ──────────  ABLATION  ────────── -->
-  <section id="ablation" class="section is-medium has-background-light">
-    <div class="container is-max-desktop">
-      <div class="container is-max-desktop">
-        <h2 class="title is-2 has-text-centered">Ablation Study</h2>
-        <!--         <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid.png" alt="Method overview" />
+    <!-- ──────────  ABLATION  ────────── -->
+    <section id="ablation" class="section is-medium has-background-light">
+        <div class="container is-max-desktop">
+            <div class="container is-max-desktop">
+                <h2 class="title is-2 has-text-centered">Ablation Study</h2>
+                <!--         <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid.png" alt="Method overview" />
         </figure>
  -->
-        <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid_low_res.png"
-            alt="Method overview" />
-        </figure>
-          <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid_2.png"
-            alt="Method overview" />
-        </figure>
-        <!-- <p class="content is-size-5 has-text-justified"> -->
-        <strong>Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
-        transfer. Incorrect predictions such as leave mislaballed as metal or Young's modulus being uniform within an
-        object are marked with question marks.
+                <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid_low_res.png"
+                        alt="Method overview" />
+                </figure>
+                <figure class="image is-fullwidth"><img src="static/images/real_ablation_grid_2.png"
+                        alt="Method overview" />
+                </figure>
+                <!-- <p class="content is-size-5 has-text-justified"> -->
+                <strong>Ablation Figure:</strong> Replacing CLIP with raw RGB or occupancy features hinders sim2real
+                transfer. Incorrect predictions such as leave mislaballed as metal or Young's modulus being uniform
+                within an
+                object are marked with question marks.
 
-        <!-- </p> -->
+                <!-- </p> -->
 
 
-        <figure class="image is-fullwidth"><img src="static/images/seg_acc_heatmap.png" alt="Method overview" />
-        </figure>
-        <!-- <p class="content is-size-5 has-text-justified"> -->
-        <strong>Ablation Figure:</strong>
-        It also severely degrades
-        material accuracy (−20 %) and almost doubles continuous errors shown Table 1, confirming the
-        importance of semantic priors.
-        <!-- </p> -->
+                <figure class="image is-fullwidth"><img src="static/images/seg_acc_heatmap.png" alt="Method overview" />
+                </figure>
+                <!-- <p class="content is-size-5 has-text-justified"> -->
+                <strong>Ablation Figure:</strong>
+                It also severely degrades
+                material accuracy (−20 %) and almost doubles continuous errors shown Table 1, confirming the
+                importance of semantic priors.
+                <!-- </p> -->
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ──────────  AUTHORS  ────────── -->
-  <section class="section is-small" id="authors">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 is-size-4-mobile has-text-centered">Authors</h2>
-
-      <div class="container has-text-centered">
-
-        <!-- Desktop / larger screens -->
-        <div class="publication-authors is-flex is-flex-wrap-wrap is-justify-content-space-around is-hidden-mobile">
-
-          <!-- Long Le -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-128x128">
-              <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/long.png" alt="Long Le" />
-              </a>
-            </figure>
-            <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">Long Le</a><sup>1</sup>
-          </div>
-
-          <!-- Ryan Lucas -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-128x128">
-              <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/ryan.png" alt="Ryan Lucas" />
-              </a>
-            </figure>
-            <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">Ryan Lucas</a><sup>2</sup>
-          </div>
-
-          <!-- Chen Wang -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-128x128">
-              <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/chen.png" alt="Chen Wang" />
-              </a>
-            </figure>
-            <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">Chen Wang</a><sup>1</sup>
-          </div>
-
-          <!-- Chuhao Chen -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-128x128">
-              <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/chuhao.png" alt="Chuhao Chen" />
-              </a>
-            </figure>
-            <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">Chuhao Chen</a><sup>1</sup>
-          </div>
-
-          <!-- Dinesh Jayaraman -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-128x128">
-              <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/dinesh.jpg" alt="Dinesh Jayaraman" />
-              </a>
-            </figure>
-            <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">Dinesh
-              Jayaraman</a><sup>1</sup>
-          </div>
-
-          <!-- Eric Eaton -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-128x128">
-              <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/eric.jpg" alt="Eric Eaton" />
-              </a>
-            </figure>
-            <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">Eric
-              Eaton</a><sup>1</sup>
-          </div>
-
-          <!-- Lingjie Liu -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-128x128">
-              <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/lingjie.jpg" alt="Lingjie Liu" />
-              </a>
-            </figure>
-            <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">Lingjie
-              Liu</a><sup>1</sup>
-          </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Mobile / tablet -->
-        <div class="is-flex is-flex-wrap-wrap is-justify-content-center is-hidden-tablet">
-          <!-- Re-use the same blocks but with smaller images -->
+    <!-- ──────────  AUTHORS  ────────── -->
+    <section class="section is-small" id="authors">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3 is-size-4-mobile has-text-centered">Authors</h2>
 
-          <!-- Long Le -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-96x96">
-              <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/long.png" alt="Long Le" />
-              </a>
-            </figure>
-            <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">Long Le</a><sup>1</sup>
-          </div>
+            <div class="container has-text-centered">
 
-          <!-- Ryan Lucas -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-96x96">
-              <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/ryan.png" alt="Ryan Lucas" />
-              </a>
-            </figure>
-            <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">Ryan Lucas</a><sup>2</sup>
-          </div>
+                <!-- Desktop / larger screens -->
+                <div
+                    class="publication-authors is-flex is-flex-wrap-wrap is-justify-content-space-around is-hidden-mobile">
 
-          <!-- Chen Wang -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-96x96">
-              <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/chen.png" alt="Chen Wang" />
-              </a>
-            </figure>
-            <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">Chen Wang</a><sup>1</sup>
-          </div>
+                    <!-- Long Le -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-128x128">
+                            <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/long.png" alt="Long Le" />
+                            </a>
+                        </figure>
+                        <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">Long
+                            Le</a><sup>1</sup>
+                    </div>
 
-          <!-- Chuhao Chen -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-96x96">
-              <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/chuhao.png" alt="Chuhao Chen" />
-              </a>
-            </figure>
-            <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">Chuhao Chen</a><sup>1</sup>
-          </div>
+                    <!-- Ryan Lucas -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-128x128">
+                            <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/ryan.png" alt="Ryan Lucas" />
+                            </a>
+                        </figure>
+                        <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">Ryan
+                            Lucas</a><sup>2</sup>
+                    </div>
 
-          <!-- Dinesh Jayaraman -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-96x96">
-              <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/dinesh.jpg" alt="Dinesh Jayaraman" />
-              </a>
-            </figure>
-            <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">Dinesh
-              Jayaraman</a><sup>1</sup>
-          </div>
+                    <!-- Chen Wang -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-128x128">
+                            <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/chen.png" alt="Chen Wang" />
+                            </a>
+                        </figure>
+                        <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">Chen
+                            Wang</a><sup>1</sup>
+                    </div>
 
-          <!-- Eric Eaton -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-96x96">
-              <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/eric.jpg" alt="Eric Eaton" />
-              </a>
-            </figure>
-            <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">Eric
-              Eaton</a><sup>1</sup>
-          </div>
+                    <!-- Chuhao Chen -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-128x128">
+                            <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/chuhao.png" alt="Chuhao Chen" />
+                            </a>
+                        </figure>
+                        <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">Chuhao
+                            Chen</a><sup>1</sup>
+                    </div>
 
-          <!-- Lingjie Liu -->
-          <div class="author-block m-3 has-text-centered">
-            <figure class="image is-96x96">
-              <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">
-                <img class="is-rounded" src="static/images/lingjie.jpg" alt="Lingjie Liu" />
-              </a>
-            </figure>
-            <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">Lingjie
-              Liu</a><sup>1</sup>
-          </div>
+                    <!-- Dinesh Jayaraman -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-128x128">
+                            <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/dinesh.jpg" alt="Dinesh Jayaraman" />
+                            </a>
+                        </figure>
+                        <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">Dinesh
+                            Jayaraman</a><sup>1</sup>
+                    </div>
+
+                    <!-- Eric Eaton -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-128x128">
+                            <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/eric.jpg" alt="Eric Eaton" />
+                            </a>
+                        </figure>
+                        <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">Eric
+                            Eaton</a><sup>1</sup>
+                    </div>
+
+                    <!-- Lingjie Liu -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-128x128">
+                            <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/lingjie.jpg" alt="Lingjie Liu" />
+                            </a>
+                        </figure>
+                        <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">Lingjie
+                            Liu</a><sup>1</sup>
+                    </div>
+                </div>
+
+                <!-- Mobile / tablet -->
+                <div class="is-flex is-flex-wrap-wrap is-justify-content-center is-hidden-tablet">
+                    <!-- Re-use the same blocks but with smaller images -->
+
+                    <!-- Long Le -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-96x96">
+                            <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/long.png" alt="Long Le" />
+                            </a>
+                        </figure>
+                        <a href="https://vlongle.github.io" target="_blank" rel="noopener noreferrer">Long
+                            Le</a><sup>1</sup>
+                    </div>
+
+                    <!-- Ryan Lucas -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-96x96">
+                            <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/ryan.png" alt="Ryan Lucas" />
+                            </a>
+                        </figure>
+                        <a href="https://ryanlucas3.github.io" target="_blank" rel="noopener noreferrer">Ryan
+                            Lucas</a><sup>2</sup>
+                    </div>
+
+                    <!-- Chen Wang -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-96x96">
+                            <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/chen.png" alt="Chen Wang" />
+                            </a>
+                        </figure>
+                        <a href="https://cwchenwang.github.io" target="_blank" rel="noopener noreferrer">Chen
+                            Wang</a><sup>1</sup>
+                    </div>
+
+                    <!-- Chuhao Chen -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-96x96">
+                            <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/chuhao.png" alt="Chuhao Chen" />
+                            </a>
+                        </figure>
+                        <a href="https://czzzzh.github.io" target="_blank" rel="noopener noreferrer">Chuhao
+                            Chen</a><sup>1</sup>
+                    </div>
+
+                    <!-- Dinesh Jayaraman -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-96x96">
+                            <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/dinesh.jpg" alt="Dinesh Jayaraman" />
+                            </a>
+                        </figure>
+                        <a href="https://www.seas.upenn.edu/~dineshj/" target="_blank" rel="noopener noreferrer">Dinesh
+                            Jayaraman</a><sup>1</sup>
+                    </div>
+
+                    <!-- Eric Eaton -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-96x96">
+                            <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/eric.jpg" alt="Eric Eaton" />
+                            </a>
+                        </figure>
+                        <a href="https://www.seas.upenn.edu/~eeaton/" target="_blank" rel="noopener noreferrer">Eric
+                            Eaton</a><sup>1</sup>
+                    </div>
+
+                    <!-- Lingjie Liu -->
+                    <div class="author-block m-3 has-text-centered">
+                        <figure class="image is-96x96">
+                            <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">
+                                <img class="is-rounded" src="static/images/lingjie.jpg" alt="Lingjie Liu" />
+                            </a>
+                        </figure>
+                        <a href="https://lingjie0206.github.io" target="_blank" rel="noopener noreferrer">Lingjie
+                            Liu</a><sup>1</sup>
+                    </div>
+                </div>
+
+                <!-- Affiliations -->
+                <div class="publication-authors mt-4">
+                    <span class="author-block"><sup>1</sup>University of Pennsylvania</span>
+                    <span class="author-block">&nbsp;&nbsp;<sup>2</sup>MIT</span>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-        <!-- Affiliations -->
-        <div class="publication-authors mt-4">
-          <span class="author-block"><sup>1</sup>University of Pennsylvania</span>
-          <span class="author-block">&nbsp;&nbsp;<sup>2</sup>MIT</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ──────────  CITATION  ────────── -->
-  <section class="section is-small" id="citation">
-    <div class="container is-max-desktop">
-      <h3 class="title is-4 has-text-centered">Citation</h3>
-      If you find this work useful, please consider citing:
-      <pre><code>@article{le2025pixie,
+    <!-- ──────────  CITATION  ────────── -->
+    <section class="section is-small" id="citation">
+        <div class="container is-max-desktop">
+            <h3 class="title is-4 has-text-centered">Citation</h3>
+            If you find this work useful, please consider citing:
+            <pre><code>@article{le2025pixie,
   title={Pixie: Fast and Generalizable Supervised Learning of 3D Physics from Pixels},
   author={Le, Long and Lucas, Ryan and Wang, Chen and Chen, Chuhao and Jayaraman, Dinesh and Eaton, Eric and Liu, Lingjie},
   journal={arXiv preprint arXiv:2508.17437},
   year={2025}
 }</code></pre>
-    </div>
-  </section>
+        </div>
+    </section>
 
-  <!-- ──────────  FOOTER  ────────── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="content has-text-centered">
-        <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI-on-Legs</a>, <a
-            href="https://www.guangzhaohe.com/canor">Canor</a>, <a href="https://www.garfield.studio/">Garfield</a> and
-          <a href="https://nerfies.github.io/">NeRFies</a>.
-        </p>
-      </div>
-    </div>
-  </footer>
+    <!-- ──────────  FOOTER  ────────── -->
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>© 2025 Pixie. Template adapted from <a href="https://umi-on-legs.github.io/">UMI-on-Legs</a>, <a
+                        href="https://www.guangzhaohe.com/canor">Canor</a>, <a
+                        href="https://www.garfield.studio/">Garfield</a> and
+                    <a href="https://nerfies.github.io/">NeRFies</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
 
-  <!-- Side navigation script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.section-nav a');
+    <!-- Side navigation script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.section-nav a');
 
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            const active = document.querySelector(`.section-nav a[href="#${entry.target.id}"]`);
-            if (active) active.classList.add('active');
-          }
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const active = document.querySelector(`.section-nav a[href="#${entry.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, {threshold: 0.35});
+
+            sections.forEach(section => observer.observe(section));
         });
-      }, { threshold: 0.35 });
+    </script>
 
-      sections.forEach(section => observer.observe(section));
-    });
-  </script>
+    <!-- Scroll bar & dark-mode toggle elements -->
+    <div id="scrollbar"></div>
+    <button id="theme-toggle" class="button is-small is-rounded"
+        style="position:fixed;bottom:1rem;right:1rem;z-index:1000;"><i class="fas fa-moon"></i></button>
 
-  <!-- Scroll bar & dark-mode toggle elements -->
-  <div id="scrollbar"></div>
-  <button id="theme-toggle" class="button is-small is-rounded"
-    style="position:fixed;bottom:1rem;right:1rem;z-index:1000;"><i class="fas fa-moon"></i></button>
+    <!-- Enhancement scripts -->
+    <script>
+        // Count-up animation (plays every time the element re-enters viewport)
+        document.querySelectorAll('.count-up').forEach(el => {
+            const target = +el.dataset.target;
+            const step = Math.max(1, Math.ceil(target / 60));
+            let animating = false;
+            const obs = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting && !animating) {
+                    animating = true;
+                    let n = 0;
+                    el.textContent = 0;
+                    const id = setInterval(() => {
+                        n += step;
+                        el.textContent = Math.min(n, target);
+                        if (n >= target) clearInterval(id);
+                    }, 20);
+                } else if (!entry.isIntersecting) {
+                    animating = false; // reset for next time
+                    el.textContent = 0;
+                }
+            }, {threshold: 0.4});
+            obs.observe(el);
+        });
 
-  <!-- Enhancement scripts -->
-  <script>
-    // Count-up animation (plays every time the element re-enters viewport)
-    document.querySelectorAll('.count-up').forEach(el => {
-      const target = +el.dataset.target;
-      const step = Math.max(1, Math.ceil(target / 60));
-      let animating = false;
-      const obs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting && !animating) {
-          animating = true;
-          let n = 0;
-          el.textContent = 0;
-          const id = setInterval(() => {
-            n += step;
-            el.textContent = Math.min(n, target);
-            if (n >= target) clearInterval(id);
-          }, 20);
-        } else if (!entry.isIntersecting) {
-          animating = false; // reset for next time
-          el.textContent = 0;
-        }
-      }, { threshold: 0.4 });
-      obs.observe(el);
-    });
+        // Scroll progress bar
+        const bar = document.getElementById('scrollbar');
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+            bar.style.width = pct * 100 + '%';
+        });
 
-    // Scroll progress bar
-    const bar = document.getElementById('scrollbar');
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement;
-      const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
-      bar.style.width = pct * 100 + '%';
-    });
+        // Dark-mode toggle
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
 
-    // Dark-mode toggle
-    const toggleBtn = document.getElementById('theme-toggle');
-    toggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-    });
+        // Hero changing Tabler icon
+        const iconClasses = [
+            'ti-leaf',     // plant
+            // 'ti-droplet',  // water
+            'ti-wind',     // air
+            'ti-magnet',        // gravity
+            'ti-snowflake',// snow      ← NEW
+            'ti-grain',     // sand      ← NEW
+            // 'ti-hourglass-low',  // sand
+        ];
 
-    // Hero changing Tabler icon
-    const iconClasses = [
-      'ti-leaf',     // plant
-      // 'ti-droplet',  // water
-      'ti-wind',     // air
-      'ti-magnet',        // gravity
-      'ti-snowflake',// snow      ← NEW
-      'ti-grain',     // sand      ← NEW
-      // 'ti-hourglass-low',  // sand
-    ];
-
-    let ii = 0;
-    setInterval(() => {
-      ii = (ii + 1) % iconClasses.length;
-      const ic = document.getElementById('changing-icon');
-      if (ic) ic.className = 'ti ' + iconClasses[ii];
-    }, 1200);
-  </script>
+        let ii = 0;
+        setInterval(() => {
+            ii = (ii + 1) % iconClasses.length;
+            const ic = document.getElementById('changing-icon');
+            if (ic) ic.className = 'ti ' + iconClasses[ii];
+        }, 1200);
+    </script>
 </body>
 
 </html>
